@@ -55,7 +55,11 @@ create table PRODUCT(
     detail VARCHAR(200) not null,
     price NUMBER(6,2) not null,
     photo VARCHAR(200) not null,
+    statep NUMBER,
     idCategory NUMBER,
+    idPerson NUMBER,
+    FOREIGN KEY (idPerson)
+    REFERENCES PERSON(id),
     FOREIGN KEY (idCategory)
     REFERENCES CATEGORY(id)
 );
@@ -63,8 +67,14 @@ create table PRODUCT(
 create table RES_WORD (
     id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
     name VARCHAR2(20) not null,
-    PRIMARY KEY(id)    
+    idProduct NUMBER not null,
+    PRIMARY KEY(id),
+    FOREIGN KEY (idProduct)
+    REFERENCES PRODUCT(id)    
 );
+
+
+
 
 
 

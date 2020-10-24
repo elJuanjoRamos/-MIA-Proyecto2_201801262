@@ -1,0 +1,104 @@
+<div class="cotainer">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Register</div>
+                <div *ngIf="productForm" class="card-body">
+                    <form [formGroup]="productForm" role="form" data-parsley-validate="" novalidate="">
+
+                        <div hidden class="form-group row">
+                            <div class="col-md-6">
+                                <input type="text" formControlName="idcategory" value="0" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.id.errors }" />
+                                <input type="text" formControlName="idperson" value="0" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.id.errors }" />
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">Nombre</label>
+                            <div class="col-md-6">
+                                <input type="text" formControlName="name" placeholder="Nombre del producto"
+                                    class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                                <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.name.errors.required">Nombre es requerido</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">Detalle</label>
+                            <div class="col-md-6">
+                                <textarea formControlName="detail" placeholder="Detalle del producto"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.detail.errors }"></textarea>
+                                <div *ngIf="submitted && f.detail.errors" class="invalid-feedback">
+                                    <div *ngIf="f.detail.errors.required">Detalle del producto</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="price" class="col-md-4 col-form-label text-md-right">Price</label>
+                            <div class="col-md-6">
+                                <input type="number" step="any" formControlName="price"
+                                    placeholder="Precio del producto" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.price.errors }" />
+                                <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+                                    <div *ngIf="f.price.errors.required">EL precio es requerido</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="price" class="col-md-4 col-form-label text-md-right">Categoria</label>
+                            <div class="col-md-6">
+                                <select formControlName="idcategory" name="pais" class="custom-select">
+                                    <option *ngFor="let cat of arrayCategorias" value="{{cat.id}}">{{cat.name}}</option>
+                                </select>
+                                <div *ngIf="submitted && f.pais.errors" class="invalid-feedback">
+                                    <div *ngIf="f.pais.errors.required">Pais es requerido</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="price" class="col-md-4 col-form-label text-md-right">Tags</label>
+                            <div class="col-md-6">
+                                <input type="text" formControlName="tags" placeholder="Palabras reservadas" class="form-control" #data data-role="tagsinput" value="">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="price" class="col-md-4 col-form-label text-md-right">Photo</label>
+                            <div class="col-md-6">
+                                <div class="custom-file-upload">
+
+                                    <label for="file-upload" class="custom-file-upload1">
+                                        <i class="fa fa-cloud-upload"></i> Custom Upload
+                                    </label>
+                                    <input id="file-upload" formControlName="photo" (change)="selectImage($event)"
+                                        type="file" />
+                                    <img [src]="localUrl" height="300px" width="500px" *ngIf="localUrl"
+                                        class="imgPlaceholder">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 offset-md-4">
+                            <button (click)="onSubmit(data.value)" type="submit" class="btn btn-primary">
+                                Guardar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

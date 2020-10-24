@@ -15,12 +15,15 @@ import { ClientComponent } from './components/dashboard/client/client.component'
 import { AuthenticationService } from './services/auth.service';
 import { CategoryService } from './services/category.service';
 import { PersonService } from './services/person.service';
+import { ProductService } from './services/product.service';
 
 
 
 import { HomeComponent } from './components/dashboard/adminn/home/home.component';
 import { AcategoryComponent } from './components/dashboard/adminn/acategory/acategory.component';
 import { ChomeComponent } from './components/dashboard/client/chome/chome.component';
+import { MyproductsComponent } from './components/dashboard/client/myproducts/myproducts.component';
+import { MyproductsFormComponent } from './components/dashboard/client/myproducts-form/myproducts-form.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,8 @@ import { ChomeComponent } from './components/dashboard/client/chome/chome.compon
     HomeComponent,
     AcategoryComponent,
     ChomeComponent,
+    MyproductsComponent,
+    MyproductsFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,8 @@ import { ChomeComponent } from './components/dashboard/client/chome/chome.compon
   providers: [
     AuthenticationService,
     CategoryService,
-    PersonService
+    PersonService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })

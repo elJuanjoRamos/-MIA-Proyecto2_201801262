@@ -1,9 +1,8 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var path = require('path');
 var cors = require('cors');
-//Important
 
+//Important
 var app = express();
 var port = 3000;
 
@@ -29,11 +28,19 @@ app.use(function(req, res, next) {
 //Routes
 var category = require('./routes/category.route');
 var user = require('./routes/person.route');
+var product = require('./routes/product.route');
+var file = require('./routes/file.route');
+
+const { strict } = require('assert');
 
 //middlewares
 
+
+
+app.use('/', file)
 app.use('/', user);
 app.use('/', category);
+app.use('/', product);
 
 app.listen(port, function() {
     console.log('El servidor corre en el puerto:' + port)

@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">Mis Productos</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+            <button (click)="insertar()" class="btn btn-sm btn-outline-secondary">Add Product</button>
+            <button class="btn btn-sm btn-outline-secondary">Export</button>
+        </div>
+        <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span>
+            This week
+        </button>
+    </div>
+</div>
+
+<div class="table-responsive">
+
+
+
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Detalle</th>
+                <th>Precio</th>
+                <th>url</th>
+                <th>Categoria</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of arrayProductos">
+                <td scope="row">{{c.id}}</td>
+                <td>{{c.name}}</td>
+                <td>{{c.detail}}</td>
+                <td>Q {{c.price}}</td>
+                <td>{{c.photo}}</td>
+                <td>{{c.category}}</td>
+                <td>
+                    <button href="#" class="btn btn-warning"><i class="fas fa-edit"></i></button> | 
+                    <button (click)="delete(c.id)" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>
+        </tbody>
+      </table>
+      
+
+
+
+
+
+
+</div>
