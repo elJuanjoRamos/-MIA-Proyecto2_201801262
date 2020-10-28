@@ -14,14 +14,15 @@ usrRout.post('/auth', async function (req, res) {
 
         const { username, password } = req.body;
 
-        var query = "select * from person where mail =:username and pass=:password";
+        var query = "select * from person where activo = 1 and mail =:username and pass=:password";
 
         let result = await database.Open(query, [username, password], false);
 
-
+        console.log(result)
+        
         USER = [];
 
-        if (result.rows.length > 0 || result.rows.length != undefined) {
+        if (result.rows.length > 0) {
           result.rows.map(usr => {
             let usrSchema = {
               "id":       usr[0],
@@ -34,7 +35,8 @@ usrRout.post('/auth', async function (req, res) {
               "photo":    usr[7],
               "credit":   usr[8],
               "activo":   usr[9],
-              "idtipe":   usr[10]
+              "idtipe":   usr[10],
+              "estado" : true
             }
             USER.push(usrSchema);
           });
@@ -46,32 +48,18 @@ usrRout.post('/auth', async function (req, res) {
           USER[0].mensaje = "Se autorizo el acceso";
           USER[0].token = token;
           
-          res.json(USER/*JSON.parse(JSON.stringify(USER))*/);
+          res.json(USER);
         } else {
-          res.json({
-            "messaje": "Error"
-          });
+          let schema = {
+            "messaje": "Usuario no encontrado, verifique que haya confirmado su correo y escriba nuevamente sus credenciales",
+            "estado" : false
+          }
+          USER.push(schema)
+          res.json(USER);
         }
 
         
-        /*if (result.rows > 0) {
-            
-
-            var token = 'Bearer ' + jwt.sign(JSON.parse(JSON.stringify(USER[0])), 'shh', { expiresIn: '1h' });
-              USER[0].estado = true;
-              USER[0].mensaje = "Se autorizo el acceso";
-              USER[0].token = token;
-              
-
-              res.json(JSON.parse(JSON.stringify(USER)));
-              
-          } else {
-            res.json({
-              estado: false,
-              mensaje: "Nick o Password incorrecto/a"
-            });
-          }*/
-        //console.log(USER)
+        
     } else {
         console.log("error");
     }
@@ -88,11 +76,22 @@ usrRout.post('/iuser', async function (req, res) {
       var query = "INSERT INTO PERSON(name, lastname, pais, cdate, pass, mail, photo, credit, idtipe, activo) " + 
                   "VALUES(:name, :lastname, :pais, :cdate, :pass, :mail, :photo, :credit, :idtipe, 0)";
 
-      await database.Open(query, [name, lastname, pais, cdate, pass, mail, photo, credit, idtipe], true);
-
-      res.status(200).json({
-        "messaje": "Insertado correctamente"
-      });
+      let result  = await database.Open(query, [name, lastname, pais, cdate, pass, mail, photo, credit, idtipe], true);
+      
+      if (result.rowsAffected > 0) {
+        var idquery = "select id from PERSON where ID = (select max(ID) from PERSON)"  
+          let idres = await database.Open(idquery, [], true);
+          
+          let id;
+          idres.rows.map(usr => {
+            id = usr[0]
+          }); 
+          res.status(200).json({
+            "messaje": "Insertado correctamente",
+            "id" : id
+          });
+      }
+      
   } else {
       console.log("error");
   }
@@ -149,13 +148,13 @@ usrRout.put('/person/:i', async (req, res) => {
     activo: req.body.activo,
     idtipe: req.body.idtipe,
     credit: req.body.credit,
+    photo: req.body.photo,
     id: i,
 }
-
  
-  let query = "UPDATE PERSON SET name =:name, lastname=:lastname, pais=:pais, cdate =:cdate, mail=:mail, pass=:pass where id =:id";
+  let query = "UPDATE PERSON SET name =:name, lastname=:lastname, pais=:pais, cdate =:cdate, mail=:mail, pass=:pass, photo=:photo where id =:id";
 
-  let result = await database.Open(query, [data.name, data.lastname, data.pais, data.cdate, data.mail, data.pass, data.id], true);
+  let result = await database.Open(query, [data.name, data.lastname, data.pais, data.cdate, data.mail, data.pass, data.photo, data.id], true);
 
   if (result.rowsAffected > 0) {
     res.json({

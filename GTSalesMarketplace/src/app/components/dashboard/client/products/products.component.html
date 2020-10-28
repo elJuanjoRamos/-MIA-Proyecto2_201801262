@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">Listado de Productos</h1>
+</div>
+
+<div class="container">
+    <div>
+      <div class="search-hero">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Buscar un producto">
+      </div>
+    </div>
+    <br>
+    <div class="product-list">
+      <div class="row">
+        
+        <div class="col-md-3 col-sm-6" *ngFor="let i of arrayProductos | filter:searchText">
+          <div class="white-box" >
+            <div class="wishlist-icon">
+              <a href="javascript:void(0);"><img src="https://pngimage.net/wp-content/uploads/2018/06/wishlist-icon-png-3.png" /></a>
+            </div>
+            <div class="product-img">
+              <img src="assets/img/{{i.photo}}">
+            </div>
+            <div class="product-bottom">
+              <div class="product-name">{{i.name}}</div>
+              <div class="price">
+                <span class="rupee-icon">Q</span> {{i.price}} 
+              </div>
+              <a href="#" class="blue-btn">Comprar</a>
+              <a (click)="detalles(i.id)" style="color: white;" type="button"    class="blue-btn">Detalles</a>
+
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="#" type="button" class="blue-btn"><i class="far fa-thumbs-up"></i></a>
+                <a href="#" type="button" class="blue-btn"><i class="far fa-thumbs-down"></i></a>
+              </div>
+
+              
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+</div>

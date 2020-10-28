@@ -13,8 +13,8 @@ export class ChomeComponent implements OnInit {
   error = '';
   validar: boolean = false;
   submitted = false;
-
-
+  localUrl: any;
+  file:any;
   /////
   nombrecompleto:any
   credito:any
@@ -41,6 +41,19 @@ export class ChomeComponent implements OnInit {
         activo: ['', Validators.required]
     });
     this.inicializar();
+  }
+
+  selectImage(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.file = file;
+
+      var reader = new FileReader ();
+      reader.readAsDataURL(file)
+       reader.onload = (_event) => {
+       this.localUrl = reader.result;
+      }
+    }    
   }
 
   inicializar(){
@@ -85,11 +98,21 @@ export class ChomeComponent implements OnInit {
     if (this.usrForm.invalid) {
       return;
     }
+    const formData = new FormData();
+    formData.append('file', this.file);
+
+   this.service.postImage(formData).subscribe((res) => {
+    this.usrForm.value.photo = res.filename;
     this.service.put(this.usrForm.value, this.uri).subscribe(res => {
-        setTimeout(() => {
-          this.router.navigate(['/dashboard/client/homeclient/', this.uri]);
-        }, 2000); 
+      setTimeout(() => {
+        this.router.navigate(['/dashboard/client/homeclient/', this.uri]);
+      }, 2000); 
     });
+
+   },
+   (err) => console.log(err)
+   ); 
+    
   }
 
 

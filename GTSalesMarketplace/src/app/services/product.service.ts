@@ -12,13 +12,23 @@ export class ProductService {
 
     getAll(id: any) {
         return this.http.get<any[]>(`${this.URI}/product/${id}`).pipe(map(data => {
-            console.log(data)
+            return data;
+            }));
+    }
+    getAll2(id: any) {
+        return this.http.get<any[]>(`${this.URI}/getall/${id}`).pipe(map(data => {
             return data;
             }));
     }
     getProduct(id: any) {
         return this.http.get<any>(`${this.URI}/gproduct/${id}`).pipe(map(data => {
+                console.log(data)
                 return data;
+            }));
+    }
+    getReservada(id: any) {
+        return this.http.get<any>(`${this.URI}/reservada/${id}`).pipe(map(data => {
+            return data;
             }));
     }
     delete(id:any) {
@@ -47,7 +57,13 @@ export class ProductService {
     put(any:any, id:any) {
         let data = JSON.stringify(any);
         var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token')});
-        return this.http.put(`${this.URI}/person/${id}`, data, { headers }).pipe(map(data => {
+        return this.http.put(`${this.URI}/uproduct/${id}`, data, { headers }).pipe(map(data => {
+            return data;
+        }));
+    }
+    blockProduct(id:any) {
+        var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token')});
+        return this.http.put(`${this.URI}/bproduct/${id}`, {}, { headers }).pipe(map(data => {
             return data;
         }));
     }

@@ -4,10 +4,10 @@ var fileRoute = express.Router();
 
 const storage = multer.diskStorage({
     destination: (req, file, callBack) => {
-        callBack(null, 'uploads')
+        callBack(null, '/home/eljuanjoramos/Documentos/Archivos/-MIA-Proyecto2_201801262/GTSalesMarketplace/src/assets/img')
     },
     filename: (req, file, callBack) => {
-        callBack(null, `data_${file.originalname}`)
+        callBack(null, `${file.originalname}`)
     }
   })
 

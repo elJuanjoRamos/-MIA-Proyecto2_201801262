@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   constructor(private service:AuthenticationService) { }
 
   //variables
-
+  mensaje: boolean = false;
   ngOnInit(): void {
   }
 
@@ -24,6 +24,6 @@ export class LoginComponent implements OnInit {
       username: usr,
       password: pass
     }
-    this.service.login(user)
+    this.mensaje =  this.service.login(user)
   }
 }

@@ -1,0 +1,92 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">Denuncias</h1>
+</div>
+<div class="container">
+    <div class="row">
+        <div *ngFor="let den of denuncias" class="col-lg-4 col-md-6">
+            <!-- Single Blog -->
+            <div class="single-blog">
+                <div class="blog-img">
+                    <img src="assets/img/person.png" alt="">
+                    <div class="post-category">
+                        <a>Denuncia</a>
+                    </div>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-title">
+                        <h4><a>{{den.nombre}} {{den.apellido}}</a></h4>
+                        <div class="meta">
+                            <ul>
+                                <li>{{den.dates}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p>{{den.descripcion}}</p>
+                    <a type="button" (click)="insertar(den)" data-toggle="modal" data-target="#exampleModal"
+                        class="box_btn">read more</a>
+                </div>
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detalle de Denuncia</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div *ngIf="denunciatemporal" class="modal-body">
+                <h5>Datos del Usuario</h5>
+                <p>
+                   Nombre: {{denunciatemporal.nombre}} {{denunciatemporal.apellido}} 
+                </p>
+                <p>
+                    Fecha de envio: {{denunciatemporal.dates}}  
+                 </p>
+                <hr>
+                <h5>Datos del Vendedor</h5>
+                <p>
+                   Nombre: {{denunciatemporal.namemalo}} 
+                </p>
+                <hr>
+                <h5>Datos del Producto</h5>
+                <p>
+                    Producto: {{denunciatemporal.producto}}  
+                </p>
+                <p>
+                    Precio: Q {{denunciatemporal.price}}  
+                </p>
+                <p>
+                    Categoria: {{denunciatemporal.category}}  
+                </p>
+                <p>
+                    Detalle: {{denunciatemporal.detalle}}  
+                </p>
+                <hr>
+                <h5>Descripcion de Denuncia</h5>
+                <p>
+                    {{denunciatemporal.descripcion}}  
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" (click)="bloquear(denunciatemporal.id, denunciatemporal.idprod)" data-dismiss="modal" class="btn btn-primary">Bloquear Publicacion</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -9,6 +9,9 @@ import { SigninComponent } from './components/signin/signin.component';
 import { AdminnComponent } from './components/dashboard/adminn/adminn.component';
 import { ClientComponent } from './components/dashboard/client/client.component';
 
+// search module
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 //SERVICES
 
@@ -16,6 +19,8 @@ import { AuthenticationService } from './services/auth.service';
 import { CategoryService } from './services/category.service';
 import { PersonService } from './services/person.service';
 import { ProductService } from './services/product.service';
+import { LikeService } from './services/like.service';
+import { ComentarioService } from './services/comentario.service';
 
 
 
@@ -24,6 +29,10 @@ import { AcategoryComponent } from './components/dashboard/adminn/acategory/acat
 import { ChomeComponent } from './components/dashboard/client/chome/chome.component';
 import { MyproductsComponent } from './components/dashboard/client/myproducts/myproducts.component';
 import { MyproductsFormComponent } from './components/dashboard/client/myproducts-form/myproducts-form.component';
+import { ProductsComponent } from './components/dashboard/client/products/products.component';
+import { ProductDetailComponent } from './components/dashboard/client/product-detail/product-detail.component';
+import { DenunciaComponent } from './components/dashboard/client/denuncia/denuncia.component';
+import { AdenunciaComponent } from './components/dashboard/adminn/adenuncia/adenuncia.component';
 
 @NgModule({
   declarations: [
@@ -37,19 +46,26 @@ import { MyproductsFormComponent } from './components/dashboard/client/myproduct
     ChomeComponent,
     MyproductsComponent,
     MyproductsFormComponent,
+    ProductsComponent,
+    ProductDetailComponent,
+    DenunciaComponent,
+    AdenunciaComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ng2SearchPipeModule
   ],
   providers: [
     AuthenticationService,
     CategoryService,
     PersonService,
-    ProductService
+    ProductService,
+    LikeService,
+    ComentarioService
   ],
   bootstrap: [AppComponent]
 })

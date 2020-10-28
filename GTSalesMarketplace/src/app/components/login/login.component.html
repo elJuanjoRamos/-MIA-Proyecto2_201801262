@@ -27,6 +27,10 @@
                         <div class="form-group">
                             <input class="form-control" #pass placeholder="******" type="password">
                         </div> <!-- form-group// -->
+                        <div *ngIf="mensaje">
+                            <a class="small" style="color: red;">Usuario no encontrado</a>
+                        </div>
+                        <br>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">

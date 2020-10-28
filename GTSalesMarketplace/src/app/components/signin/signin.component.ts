@@ -24,15 +24,25 @@ export class SigninComponent implements OnInit {
           "cdate": d,
           "pass": pa,
           "mail":m,
-          "photo":"0",
+          "photo":"default.png",
           "credit": 10000,
           "idtipe": 2
         }
 
         this.service.post(person).subscribe(res=> {
-          this.router.navigate(['/login']);
+          let result = JSON.parse(JSON.stringify(res))
+          var mail = {
+            "nombre" : n + " " + l,
+            "mail": m,
+            "mensaje" : "correo de confirmacion",
+            "idusuario" : result.id
+          } 
+           
+          this.service.sendMessage(mail).subscribe(data => {
+            this.router.navigate(['/login']);
+          })
+
+          
         });
-
-
   }
 }

@@ -14,15 +14,21 @@
         <div class="sidebar-sticky">
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link active" href="#">
-                <span data-feather="dashboard/admin/home"></span>
+              <a class="nav-link active" [routerLink]="['/dashboard/admin/home']" >
+                <span  ></span>
                 Dashboard <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="dashboard/admin/category">
+              <a class="nav-link" [routerLink]="['/dashboard/admin/category']" >
                 <span data-feather="file"></span>
                 Category
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/dashboard/admin/denuncia']">
+                <span data-feather="users"></span>
+                Denuncias
               </a>
             </li>
             <li class="nav-item">
@@ -31,12 +37,7 @@
                 Products
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="users"></span>
-                Customers
-              </a>
-            </li>
+            
             <li class="nav-item">
               <a class="nav-link" href="#">
                 <span data-feather="bar-chart-2"></span>

@@ -24,7 +24,7 @@ export class AuthenticationService {
     }
 
 
-    login(usuario: any) {
+    login(usuario: any): boolean {
         let uriUsuario: string = 'http://localhost:3000/auth/';
         let head = new HttpHeaders();
         head.append('Content-Type', 'application/json');
@@ -40,27 +40,36 @@ export class AuthenticationService {
                     'results': JSON.stringify(user[0]),
                     'json': () => { return user[0]; }
                 };
-                let token = JSON.parse(JSON.stringify(res.json())).token;
-                let rol = JSON.parse(JSON.stringify(res.json())).idtipe;
-                let iduser = JSON.parse(JSON.stringify(res.json())).id;
-                //if (token) {
-                localStorage.setItem('id', JSON.parse(JSON.stringify(res.json())).id);
-                localStorage.setItem('token', token);
-                localStorage.setItem('user', JSON.stringify(res.json()))
-                
+                let estado = JSON.parse(JSON.stringify(res.json())).estado
 
-                if (rol === 1) {
-                    this.router.navigate(['/dashboard/admin/home']);
-                } else if (rol === 2) {
-                    this.router.navigate(['/dashboard/client/homeclient/', iduser]);
+                if (estado) {
+                    let token = JSON.parse(JSON.stringify(res.json())).token;
+                    let rol = JSON.parse(JSON.stringify(res.json())).idtipe;
+                    let iduser = JSON.parse(JSON.stringify(res.json())).id;
+
+                    //if (token) {
+                    localStorage.setItem('id', JSON.parse(JSON.stringify(res.json())).id);
+                    localStorage.setItem('token', token);
+                    localStorage.setItem('user', JSON.stringify(res.json()))
+
+
+                    if (rol === 1) {
+                        this.router.navigate(['/dashboard/admin/home']);
+                    } else if (rol === 2) {
+                        this.router.navigate(['/dashboard/client/homeclient/', iduser]);
+                    }
+                    return false
+                } else { 
+                    return true
                 }
-                /*} else {
-                    console.log("No existen token");
-                    return false;
-                }*/
+
+                
             }, error => {
                 console.log(error.text());
             });
+
+
+            return true
 
     }
 

@@ -17,6 +17,8 @@ export class MyproductsFormComponent implements OnInit {
   arrayCategorias :any;
   file:any = null;
   localUrl: any;
+  visible:boolean = false
+  reservadas:any;
   constructor(private service: ProductService, private formBuilder: FormBuilder, private sanitizer:DomSanitizer,
     private activatedRoute: ActivatedRoute, private router: Router, private category:CategoryService) {
     
@@ -32,11 +34,19 @@ export class MyproductsFormComponent implements OnInit {
               'name': new FormControl(this.producto.name),
               'detail': new FormControl(this.producto.detail),
               'price': new FormControl(this.producto.price),
-              'photo': new FormControl(this.producto.photo),
+              'tags': new FormControl(''),
+              'photo': new FormControl(''),
               'idcategory': new FormControl(this.producto.idcategory),
               'idperson': new FormControl(this.producto.idperson)
             });
+            this.service.getReservada(this.uri).subscribe(d => {
+              if (d.length > 0) {
+                this.visible = true
+                this.reservadas = d                
+              }
+            })
           });
+          
         }
       });
       
@@ -50,6 +60,7 @@ export class MyproductsFormComponent implements OnInit {
       detail: ['', Validators.required],
       price: ['', Validators.required],
       photo: ['', Validators.required],
+      tags: ['', Validators.required],
       idcategory: ['', Validators.required],
       idperson: ['', Validators.required],
     });
@@ -95,23 +106,29 @@ export class MyproductsFormComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', this.file);
 
+    
     this.service.postImage(formData).subscribe(
       (res) => {
-        console.log(res.path)
-
+        
         var prod = {
           "name" : this.productForm.value.name,
           "detail" : this.productForm.value.detail,
           "price" : this.productForm.value.price,
           "idcategory" : this.productForm.value.idcategory,
           "idperson": localStorage.getItem('id'),
-          "photo": res.path,
+          "photo": res.filename,
           "reserv": p
         }
-
-        this.service.post(prod).subscribe(data => {
-          this.router.navigate(['/dashboard/client/myproducts']);
-        })
+        if (this.uri == 'gestion') {
+          this.service.post(prod).subscribe(data => {
+            this.router.navigate(['/dashboard/client/myproducts']);
+          })
+        } else {
+          this.service.put(prod, this.uri).subscribe(data =>{
+            this.router.navigate(['/dashboard/client/myproducts']);
+          });
+        }
+        
       },
       (err) => console.log(err)
     );

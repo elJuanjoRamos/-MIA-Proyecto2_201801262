@@ -38,4 +38,8 @@ export class MyproductsComponent implements OnInit {
       this.inicializar()
     });
   }
+
+  update(id:any){
+    this.router.navigate(['dashboard/client/myproducts/', id]);
+  }
 }

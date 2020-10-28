@@ -29,7 +29,12 @@ app.use(function(req, res, next) {
 var category = require('./routes/category.route');
 var user = require('./routes/person.route');
 var product = require('./routes/product.route');
+var likes = require('./routes/like.route');
 var file = require('./routes/file.route');
+var comentario = require('./routes/comentario.route');
+var denuncia = require('./routes/denunce.routes');
+var mail = require('./routes/mail.route');
+
 
 const { strict } = require('assert');
 
@@ -37,10 +42,15 @@ const { strict } = require('assert');
 
 
 
+
 app.use('/', file)
 app.use('/', user);
 app.use('/', category);
 app.use('/', product);
+app.use('/', likes);
+app.use('/', comentario);
+app.use('/', denuncia);
+app.use('/', mail)
 
 app.listen(port, function() {
     console.log('El servidor corre en el puerto:' + port)

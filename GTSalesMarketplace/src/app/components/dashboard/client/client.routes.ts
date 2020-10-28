@@ -4,13 +4,18 @@ import { Routes } from '@angular/router';
 import { ChomeComponent } from './chome/chome.component';
 import { MyproductsComponent } from './myproducts/myproducts.component';
 import { MyproductsFormComponent } from './myproducts-form/myproducts-form.component'
+import { ProductsComponent } from './products/products.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { DenunciaComponent } from './denuncia/denuncia.component';
 
 export const client_routes: Routes = [
     { path: 'homeclient/:id', component: ChomeComponent },
     { path: 'myproducts', component: MyproductsComponent },
     { path: 'myproducts/:id', component: MyproductsFormComponent },
-//    { path: 'admin/detallecurso', component: DetalleCursoComponent },
-//    { path: 'admin/detallecurso/:id', component: DetalleCursoFormComponent },
+    { path: 'products', component: ProductsComponent },
+    { path: 'products/:id', component: ProductDetailComponent },
+    { path: 'denuncia/:id', component: DenunciaComponent },
+    
 //    { path: 'admin/asignacionauxiliar', component: AsignacionAuxiliar },
 //   { path: 'admin/asignacionauxiliar/:id', component: AsignacionForm },
 //    { path: 'admin/desasignacion', component: DesasignacionComponent },

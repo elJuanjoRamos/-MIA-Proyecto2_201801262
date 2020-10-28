@@ -42,4 +42,14 @@ export class PersonService {
             return data;
         }));
     }
+    postImage(image:any){
+
+        return this.http.post<any>('http://localhost:3000/file',image).pipe(map(data => {
+            return data;
+        }));
+    }
+
+    sendMessage(body) {
+        return this.http.post(`${this.URI}/formulario`, body);
+    }
 }

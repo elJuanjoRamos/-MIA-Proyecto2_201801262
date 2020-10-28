@@ -70,8 +70,15 @@
                         <div class="form-group row">
                             <label for="price" class="col-md-4 col-form-label text-md-right">Tags</label>
                             <div class="col-md-6">
-                                <input type="text" formControlName="tags" placeholder="Palabras reservadas" class="form-control" #data data-role="tagsinput" value="">
+                                <input type="text" #data formControlName="tags" name="tags" placeholder="Palabras reservadas" class="form-control" data-role="tagsinput" value="">
                             </div>
+                        </div>
+
+                        <div *ngIf="visible" class="form-group row">
+                            <label for="price" class="col-md-4 col-form-label text-md-right">Tags anteriores</label>
+                            <ul>
+                                <li *ngFor="let i of reservadas">{{i.name}}</li>
+                               </ul>
                         </div>
 
 

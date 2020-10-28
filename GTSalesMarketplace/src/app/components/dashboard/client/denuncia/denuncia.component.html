@@ -1,0 +1,75 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">Denunciar producto</h1>
+</div>
+
+
+<div class="container" *ngIf="producto">
+    <div class="row" >
+        <div class="col-md-6">
+            <img width="500" height="300" src="assets/img/{{producto.photo}}" />
+        </div>
+        <div class="col-md-6">
+            <div class="product-dtl">
+                <div class="product-info" >
+                    <div class="product-price-discount">Producto: {{producto.name}}</div>
+                    <div class="product-price-discount">Vendedor: {{producto.personname}} {{producto.personlast}}</div>
+                    <div class="product-price-discount">Precio: Q{{producto.price}}</div>
+                    <div class="product-price-discount">Categoria: {{producto.categoryname}}</div>
+                </div>
+                
+                <div>
+                    <span>Tags</span>
+                </div>
+                <div>
+                    
+                    <span *ngFor="let i of reservadas" class="badge badge-pill badge-primary">{{i.name}}</span>
+                </div>
+                <p></p>
+            </div>
+        </div>
+    </div>
+    <div class="product-info-tabs">
+        <form [formGroup]="productForm" class="review-form">
+            <div class="form-group">
+                <label>Tu mensaje</label>
+                <textarea class="form-control" formControlName="mensaje" [ngClass]="{ 'is-invalid': submitted && f.mensaje.errors }"  rows="10"></textarea>
+            </div>
+            <div *ngIf="submitted && f.mensaje.errors" class="invalid-feedback">
+                <div *ngIf="f.mensaje.errors.required">Mensaje es requerido</div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" name="" class="form-control" formControlName="nombre" [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }"   placeholder="nombre*">
+                    </div>
+                    <div *ngIf="submitted && f.nombre.errors" class="invalid-feedback">
+                        <div *ngIf="f.nombre.errors.required">Nombre es requerido</div>
+                    </div>
+                    
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" name="" class="form-control" formControlName="mail" [ngClass]="{ 'is-invalid': submitted && f.mail.errors }"   placeholder="Email*">
+                    </div>
+                    <div *ngIf="submitted && f.mail.errors" class="invalid-feedback">
+                        <div *ngIf="f.mail.errors.required">Correo es requerido</div>
+                    </div>
+                </div>
+            </div>
+            <button (click)="onSubmit()" type="submit" class="round-black-btn">Enviar Denuncia</button>
+        </form>
+    </div>
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+

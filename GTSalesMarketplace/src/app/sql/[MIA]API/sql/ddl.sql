@@ -78,6 +78,7 @@ create table RES_WORD (
 
 
 
+
 create table DENUNCE(
     id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
     PRIMARY KEY(id),
@@ -103,6 +104,7 @@ create table LOGG(
 create table LIKES(
     id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
     PRIMARY KEY(id),
+    path VARCHAR(100) not null,
     idPerson NUMBER not null,
     idProduct NUMBER not null,
     FOREIGN KEY (idPerson)
