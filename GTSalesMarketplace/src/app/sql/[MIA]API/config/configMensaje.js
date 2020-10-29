@@ -18,8 +18,7 @@ module.exports = (formulario) => {
     <strong>Mensaje:</strong> ${formulario.mensaje}
     
     <br>
-    Para confirmar su acceso dirijase al siguiente link
-    <strong>http://localhost:3000/confirmar/${formulario.idusuario}</strong>
+    ${formulario.mensaje2}
     
     
     

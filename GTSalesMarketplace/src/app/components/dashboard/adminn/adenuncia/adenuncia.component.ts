@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ComentarioService } from '../../../../services/comentario.service';
 import { ProductService } from '../../../../services/product.service';
+import { PersonService } from '../../../../services/person.service'
 
 @Component({
   selector: 'app-adenuncia',
@@ -11,7 +12,7 @@ export class AdenunciaComponent implements OnInit {
   
   denuncias:any = []
   denunciatemporal:any
-  constructor(private service:ComentarioService, private productservice: ProductService) { 
+  constructor(private service:ComentarioService, private personService: PersonService,  private productservice: ProductService) { 
     this.inicializar()
   }
 
@@ -29,15 +30,28 @@ export class AdenunciaComponent implements OnInit {
       this.denunciatemporal = info
   }
 
-  bloquear(id:any, idproduct:any){
+  rechazardenuncia(id){
     this.service.putDenuncia(id).subscribe(data =>{
-        var res:any = data;
-        if (res.state) {
-          this.productservice.blockProduct(idproduct).subscribe(dat=>{
-            this.inicializar()
-          })  
-        }
+        this.inicializar()
     })
   }
 
+  aceptardenuncia(denuncia){
+    this.service.putDenuncia(denuncia.id).subscribe(data =>{
+
+      this.productservice.blockProduct(denuncia.idprod).subscribe(dat => {
+        
+        var mail = {
+          "nombre" : denuncia.namemalo,
+          "mail": denuncia.mail,
+          "mensaje" : "Producto bloqueado ID:" + denuncia.idprod,
+          "mensaje2" : "<br>Una o mas quejas llegaron respecto al siguiente producto"+ " <br> <strong>Producto: </strong>" + denuncia.producto +" <br> <strong>Precio: </strong>" + denuncia.price +" <br> <strong>Categoria: </strong>" + denuncia.category +" <br> <strong>Detalle: </strong>" + denuncia.detalle + "<br> Por lo que administracion decidio eliminar su publicacion"     
+        } 
+         
+        this.personService.sendMessage(mail).subscribe(data => {
+          this.inicializar()
+        })
+      })
+    })
+  }
 }

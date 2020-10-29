@@ -161,7 +161,7 @@ productRoute.get('/gproduct/:id', async (req, res) => {
   
     let query = "select product.id, product.name, detail, price, photo, idperson, idcategory, category.name as category from PRODUCT " +
     "JOIN category  ON product.idcategory = category.id "+
-    "where product.id !=:id";
+    "where product.id !=:id and statep = 1";
   
     let result = await database.Open(query, [id], true);
   

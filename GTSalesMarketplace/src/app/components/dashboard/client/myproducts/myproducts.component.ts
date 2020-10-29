@@ -29,9 +29,6 @@ export class MyproductsComponent implements OnInit {
 
   }
 
-  insertar(){
-    this.router.navigate(['dashboard/client/myproducts/', 'gestion']);
-  }
 
   delete(id:any){
     this.service.delete(id).subscribe(res =>{

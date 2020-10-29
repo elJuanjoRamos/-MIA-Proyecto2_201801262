@@ -19,6 +19,7 @@ denunceRouter.get('/denuncias', async function (req, res) {
     "product.name as producto, product.detail as detalle, product.price as price, product.id as idprod, " +
     "(select name from category where id = product.idcategory) as category, " +
     "(select CONCAT(CONCAT(name, ' '), lastname) from person where id = (select idperson from product where id = denunce.idproduct)) as namemalo, "+
+    "(select mail from person where id = (select idperson from product where id = denunce.idproduct)) as mail, "+
     "person.photo from denunce "+
     "JOIN Person on denunce.idperson = person.id "+
     "JOIN Product on denunce.idproduct = product.id "+
@@ -43,7 +44,8 @@ denunceRouter.get('/denuncias', async function (req, res) {
         "idprod" : cat[9],
         "category": cat[10],
         "namemalo": cat[11],
-        "photo" : cat[12]
+        "mail" : cat[12],
+        "photo"  : cat[13]
       }
 
       DENUN.push(schema);
@@ -78,7 +80,7 @@ denunceRouter.post('/denuncias', async function (req, res) {
 denunceRouter.put('/denuncias/:id', async (req, res) => {
   const { id } = req.params;
 
-  let query = "UPDATE denunce SET isblocked=1 where id =:id";
+  let query = "DELETE from denunce where id =:id";
 
   let result = await database.Open(query, [id], true);
 

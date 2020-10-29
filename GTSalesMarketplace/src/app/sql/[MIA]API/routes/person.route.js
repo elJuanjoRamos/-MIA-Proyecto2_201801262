@@ -14,7 +14,7 @@ usrRout.post('/auth', async function (req, res) {
 
         const { username, password } = req.body;
 
-        var query = "select * from person where activo = 1 and mail =:username and pass=:password";
+        var query = "select * from person where  mail =:username and pass=:password";
 
         let result = await database.Open(query, [username, password], false);
 

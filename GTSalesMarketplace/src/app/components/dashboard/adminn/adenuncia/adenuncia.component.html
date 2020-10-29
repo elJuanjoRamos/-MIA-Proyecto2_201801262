@@ -7,7 +7,7 @@
             <!-- Single Blog -->
             <div class="single-blog">
                 <div class="blog-img">
-                    <img src="assets/img/person.png" alt="">
+                    <img src="assets/img/{{den.photo}}" alt="">
                     <div class="post-category">
                         <a>Denuncia</a>
                     </div>
@@ -85,7 +85,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" (click)="bloquear(denunciatemporal.id, denunciatemporal.idprod)" data-dismiss="modal" class="btn btn-primary">Bloquear Publicacion</button>
+                <button type="button" (click)="rechazardenuncia(denunciatemporal.id)" data-dismiss="modal" class="btn btn-danger">Rechazar Denuncia</button>
+                <button type="button" (click)="aceptardenuncia(denunciatemporal)" data-dismiss="modal" class="btn btn-primary">Aceptar Denuncia</button>
             </div>
         </div>
     </div>

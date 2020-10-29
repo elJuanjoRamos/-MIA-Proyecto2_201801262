@@ -34,8 +34,8 @@ export class SigninComponent implements OnInit {
           var mail = {
             "nombre" : n + " " + l,
             "mail": m,
-            "mensaje" : "correo de confirmacion",
-            "idusuario" : result.id
+            "mensaje" : "Correo de confirmacion",
+            "mensaje2" : "Para confirmar su acceso dirijase al siguiente link \n <strong>http://localhost:3000/confirmar/"+ result.id +"</strong>"          
           } 
            
           this.service.sendMessage(mail).subscribe(data => {
