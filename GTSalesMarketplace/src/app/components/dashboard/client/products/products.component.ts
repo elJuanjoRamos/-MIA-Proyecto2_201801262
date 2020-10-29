@@ -16,7 +16,7 @@ export class ProductsComponent implements OnInit {
   localUrl:string = "https://static.thenounproject.com/png/635650-200.png";
   resultado: boolean = false;
   searchText;
-  constructor(private service:ProductService, private likesevice: LikeService, private catsetvice: CategoryService, 
+  constructor(private service:ProductService, private catsetvice: CategoryService, 
     private router: Router) { 
     this.inicializar()
   }
@@ -32,32 +32,6 @@ export class ProductsComponent implements OnInit {
     });
     this.catsetvice.getAll().subscribe(data =>{
       this.arrayCategorias = data;
-    })
-  }
-  likeOrNot(id): boolean{
-    var data = {
-      'idperson' : this.idUser,
-      'idproduct': id
-    }
-    this.likesevice.getLike(data).subscribe(d => {
-      var result:any = d
-      return result.likes 
-    })
-    return false
-  }
-
-  addlike(id){
-    var data = {
-      'idperson' : this.idUser,
-      'idproduct': id
-    }
-    this.likesevice.getLike(data).subscribe(d => {
-      var result:any = d
-      if (!result.likes) {
-        this.service.post(data).subscribe(dd =>{
-          
-        })
-      }
     })
   }
 

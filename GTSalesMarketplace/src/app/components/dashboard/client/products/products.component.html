@@ -21,7 +21,7 @@
           <select id="inputState" (change)="onChangePrice($event.target.value)" class="form-control">
             <option value="NOR" selected>Normal</option>
             <option value="ASC">Ascendente</option>
-            <option value="DES">Descendente</option>
+            <option value="DESC">Descendente</option>
           </select>
         </div>
       </div>
@@ -45,13 +45,6 @@
               </div>
               <a href="#" class="blue-btn">Comprar</a>
               <a (click)="detalles(i.id)" style="color: white;" type="button"    class="blue-btn">Detalles</a>
-
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <a href="#" type="button" class="blue-btn"><i class="far fa-thumbs-up"></i></a>
-                <a href="#" type="button" class="blue-btn"><i class="far fa-thumbs-down"></i></a>
-              </div>
-
-              
             </div>
           </div>
         </div>

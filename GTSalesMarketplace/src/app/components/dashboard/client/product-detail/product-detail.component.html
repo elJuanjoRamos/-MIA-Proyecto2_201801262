@@ -37,15 +37,22 @@
                     <span *ngFor="let i of reservadas" class="badge badge-pill badge-primary">{{i.name}}</span>
                 </div>
                 <p></p>
-                <div class="product-count">
-                    <button (click)="denuncia(producto.id)"  class="round-black-btn">Denunciar</button>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button (click)="denuncia(producto.id)"  class="btn round-black-btn">Denunciar</button>
+                    <button   class="btn round-black-btn">Agregar al carrito</button>
                 </div>
-                <div class="product-count">
-                    <a href="#" class="round-black-btn">Agregar al carrito</a>
+
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button (click)="addlike(producto.id)" type="button" class="round-black-btn"><i class="far fa-thumbs-up"></i></button>    
+                    <button (click)="adddislike(producto.id)" type="button" class="round-black-btn"><i class="far fa-thumbs-down"></i></button>
                 </div>
+
             </div>
         </div>
     </div>
+    <div *ngIf="visible" class="alert alert-{{type}}" role="alert">
+        {{mensaje}}
+      </div>
     <div class="product-info-tabs">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item">

@@ -126,9 +126,9 @@ productRoute.get('/gproduct/:id', async (req, res) => {
     let query = "select product.id, product.name, detail, price, product.photo, product.idperson, idcategory, category.name as category, p.name, p.lastname from PRODUCT " +
     "JOIN category  ON product.idcategory = category.id "+
     "JOIN PERSON p ON product.idperson = p.id "+ 
-    "ORDER BY PRICE :id";
-  
-    let result = await database.Open(query, [id], true);
+    "ORDER BY PRICE " + id;
+    
+    let result = await database.Open(query, [], true);
   
     PRODUCTS = [] 
     if (result.rows.length > 0 || result.rows.length != undefined) {

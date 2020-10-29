@@ -11,28 +11,39 @@ export class LikeService {
 
     constructor(private http: HttpClient) { }
 
-    
-    delete(id:any) {
-        var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token')});
-        return this.http.delete(`${this.URI}/dcategory/${id}`, { headers }).pipe(map(data => {
-            return data;
-        }));
-    }
-    getLike(any:any) {
+
+    getlike(any:any) {
         
         let data = JSON.stringify(any);        
         var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token')});
-        return this.http.post(`${this.URI}/getlike/`, data, { headers }).pipe(map(data => {
+        return this.http.post(`${this.URI}/glike/`, data, { headers }).pipe(map(data => {
             return data;
         }));
     }
-    post(any:any) {
+    getdislike(any:any) {
         
+        let data = JSON.stringify(any);        
+        var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token')});
+        return this.http.post(`${this.URI}/gdlike/`, data, { headers }).pipe(map(data => {
+            return data;
+        }));
+    }
+    postlike(any:any) {
+        console.log(any)
         let data = JSON.stringify(any);        
         var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token')});
         return this.http.post(`${this.URI}/like/`, data, { headers }).pipe(map(data => {
             return data;
         }));
     }
+    postdislike(any:any) {
+        
+        let data = JSON.stringify(any);        
+        var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token')});
+        return this.http.post(`${this.URI}/dislike/`, data, { headers }).pipe(map(data => {
+            return data;
+        }));
+    }
+   
     
 }

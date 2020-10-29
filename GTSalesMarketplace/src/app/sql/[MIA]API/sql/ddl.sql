@@ -114,8 +114,6 @@ create table LIKES(
 );
 
 
-
-
 create table DISLIKES(
     id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
     PRIMARY KEY(id),
@@ -126,6 +124,8 @@ create table DISLIKES(
     FOREIGN KEY (idProduct)
     REFERENCES PRODUCT(id)
 );
+
+
 
 
 create table COMENT_PRODUCT(
