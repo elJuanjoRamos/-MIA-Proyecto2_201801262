@@ -4,8 +4,26 @@
 
 <div class="container">
     <div>
-      <div class="search-hero">
-        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Buscar un producto">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputCity">Buscador</label>
+          <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Buscar un producto">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputCat">Filtro Categorias</label>
+          <select id="inputCat" (change)="onChangeCategory($event.target.value)" class="form-control">
+            <option value="0">Normal</option>
+            <option *ngFor="let i of arrayCategorias"  value="{{i.id}}">{{i.name}}</option>
+          </select>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputZip">Filtro Precio</label>
+          <select id="inputState" (change)="onChangePrice($event.target.value)" class="form-control">
+            <option value="NOR" selected>Normal</option>
+            <option value="ASC">Ascendente</option>
+            <option value="DES">Descendente</option>
+          </select>
+        </div>
       </div>
     </div>
     <br>

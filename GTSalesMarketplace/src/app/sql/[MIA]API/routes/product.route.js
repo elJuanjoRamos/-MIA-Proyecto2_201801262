@@ -78,7 +78,84 @@ productRoute.get('/gproduct/:id', async (req, res) => {
 });
 
 
-  //GET 
+
+
+  //GET BY CATEGORY
+  productRoute.get('/gproductbycategory/:id', async (req, res) => {
+    const { id } = req.params;
+  
+    let query = "select product.id, product.name, detail, price, product.photo, product.idperson, idcategory, category.name as category, p.name, p.lastname from PRODUCT " +
+    "JOIN category  ON product.idcategory = category.id "+
+    "JOIN PERSON p ON product.idperson = p.id "+ 
+    "where product.idcategory =:id";
+  
+    let result = await database.Open(query, [id], true);
+  
+    PRODUCTS = [] 
+    if (result.rows.length > 0 || result.rows.length != undefined) {
+      result.rows.map(usr => {
+        let usrSchema = {
+          "id":           usr[0],
+          "name":         usr[1],
+          "detail":       usr[2],
+          "price":        usr[3],
+          "photo":        usr[4],
+          "idperson":     usr[5],
+          "category":     usr[6],
+          "categoryname": usr[7],
+          "personname"  : usr[8],
+          "personlast"   : usr[9]
+        }
+        PRODUCTS.push(usrSchema)
+      }); 
+      res.json(PRODUCTS);
+    } else {
+      res.json({
+        "messaje": "Error"
+      });
+    }
+  });
+
+
+
+
+  //GET BY CATEGORY
+  productRoute.get('/gproductbyprice/:id', async (req, res) => {
+    const { id } = req.params;
+    console.log(id)
+    let query = "select product.id, product.name, detail, price, product.photo, product.idperson, idcategory, category.name as category, p.name, p.lastname from PRODUCT " +
+    "JOIN category  ON product.idcategory = category.id "+
+    "JOIN PERSON p ON product.idperson = p.id "+ 
+    "ORDER BY PRICE :id";
+  
+    let result = await database.Open(query, [id], true);
+  
+    PRODUCTS = [] 
+    if (result.rows.length > 0 || result.rows.length != undefined) {
+      result.rows.map(usr => {
+        let usrSchema = {
+          "id":           usr[0],
+          "name":         usr[1],
+          "detail":       usr[2],
+          "price":        usr[3],
+          "photo":        usr[4],
+          "idperson":     usr[5],
+          "category":     usr[6],
+          "categoryname": usr[7],
+          "personname"  : usr[8],
+          "personlast"   : usr[9]
+        }
+        PRODUCTS.push(usrSchema)
+      }); 
+      res.json(PRODUCTS);
+    } else {
+      res.json({
+        "messaje": "Error"
+      });
+    }
+  });
+
+//GET 
   productRoute.get('/getall/:id', async (req, res) => {
     const { id } = req.params;
   

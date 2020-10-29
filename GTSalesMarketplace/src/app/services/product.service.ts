@@ -26,6 +26,16 @@ export class ProductService {
                 return data;
             }));
     }
+    getProductByCategory(id: any) {
+        return this.http.get<any>(`${this.URI}/gproductbycategory/${id}`).pipe(map(data => {
+                return data;
+            }));
+    }
+    getProductByPrice(id: any) {
+        return this.http.get<any>(`${this.URI}/gproductbyprice/${id}`).pipe(map(data => {
+                return data;
+            }));
+    }
     getReservada(id: any) {
         return this.http.get<any>(`${this.URI}/reservada/${id}`).pipe(map(data => {
             return data;
