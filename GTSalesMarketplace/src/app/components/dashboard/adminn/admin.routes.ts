@@ -5,17 +5,13 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AcategoryComponent } from './acategory/acategory.component';
 import { AdenunciaComponent } from './adenuncia/adenuncia.component'
- 
+import { LogComponent} from './log/log.component' 
 export const admin_routes: Routes = [
     //{ path: 'admin', component: AdminnComponent },
     { path: 'home', component: HomeComponent },
     { path: 'category/:id', component: AcategoryComponent },
     { path: 'denuncia', component: AdenunciaComponent },
-//    { path: 'admin/detallecurso', component: DetalleCursoComponent },
-//    { path: 'admin/detallecurso/:id', component: DetalleCursoFormComponent },
-//    { path: 'admin/asignacionauxiliar', component: AsignacionAuxiliar },
-//   { path: 'admin/asignacionauxiliar/:id', component: AsignacionForm },
-//    { path: 'admin/desasignacion', component: DesasignacionComponent },
-//    { path: 'admin/ticket', component: TicketAdmComponent },
+    { path: 'log', component: LogComponent },
+    
     {path: '**', pathMatch: 'full', redirectTo: 'admin'}
   ];

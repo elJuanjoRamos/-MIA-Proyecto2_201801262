@@ -119,7 +119,7 @@ productRoute.get('/gproduct/:id', async (req, res) => {
 
 
 
-  //GET BY CATEGORY
+  //GET BY PRICE
   productRoute.get('/gproductbyprice/:id', async (req, res) => {
     const { id } = req.params;
     console.log(id)
@@ -221,13 +221,15 @@ productRoute.get('/reservada/:id', async (req, res) => {
 productRoute.post('/product', async function (req, res) {
   if (database) {
 
-    const { name, detail, price, idcategory, idperson, photo, reserv } = req.body;  
+    const { name, detail, price, idcategory, idperson, photo, reserv, mail } = req.body;  
     var query = "INSERT INTO PRODUCT(name, detail, price, photo,statep, idcategory, idperson) " + 
     "VALUES(:name, :detail, :price, :photo, 1, :idcategory, :idperson)";
 
       let resultado = await database.Open(query, [name, detail, price, photo, idcategory, idperson], true);
 
       if (resultado.rowsAffected > 0) {
+        let querys = "CALL add_log('" + "La persona con ID:" + idperson + " agrego el producto: " + name +  "', '"+ mail +"')";
+        let r = await database.Open(querys, [], true);
 
         //sirve para ver si trae palabras reservadas
         if (reserv.length > 0) {
@@ -264,7 +266,7 @@ productRoute.post('/product', async function (req, res) {
 productRoute.put('/uproduct/:id', async (req, res) => {
   const { id } = req.params;
 
-  const { name, detail, price, idcategory, idperson, photo, reserv } = req.body; 
+  const { name, detail, price, idcategory, idperson, photo, reserv, mail } = req.body; 
 
  
   let query = "UPDATE PRODUCT SET name =:name, detail=:detail, price=:price, idcategory =:idcategory, photo=:photo where id =:id";
@@ -272,7 +274,10 @@ productRoute.put('/uproduct/:id', async (req, res) => {
   let result = await database.Open(query, [name, detail, price, idcategory, photo, id], true);
 
   if (result.rowsAffected > 0) {
-    
+    let querys = "CALL add_log('" + "La persona con ID:" + idperson + " modifico el producto con ID: " + id +  "', '"+ mail +"')";
+    let r = await database.Open(querys, [], true);
+
+
     if (reserv.length > 0) {
       var querydelete = "DELETE FROM res_word WHERE idproduct =:id"
       let resultelete = await database.Open(querydelete, [id], true);
@@ -309,10 +314,13 @@ productRoute.put('/bproduct/:id', async (req, res) => {
 
  
   let query = "UPDATE PRODUCT SET statep = 0  where id =:id";
-
   let result = await database.Open(query, [id], true);
 
   if (result.rowsAffected > 0) {    
+    let querys = "CALL add_log('" + "Se elimino el producto con ID: "+ id +  "', 'admin')";
+    let r = await database.Open(querys, [], true);
+
+
     res.json({
       "messaje": "Funciono"
     });
@@ -338,7 +346,9 @@ productRoute.delete('/dproduct/:id', async (req, res) => {
 
 
   if (result.rowsAffected > 0) {
-    
+    let querys = "CALL add_log('" + "Se elimino el producto con ID: "+ id +  "', 'admin')";
+    let r = await database.Open(querys, [], true);
+
     res.json({ "msg": "El producto se elimino correctamente" })    
   } else{
     res.json({ "msg": "Hubo un problema al eliminar el producto con id:"  + id })

@@ -5,16 +5,16 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div *ngIf="factura" class="col-md-12">
     		<div class="invoice-title">
-    			<h3 class="pull-right"> Order # 12345</h3>
+    			<h3 class="pull-right"> Order {{uri}}</h3>
     		</div>
     		<hr>
     		<div class="row">
     			<div class="col-md-6">
     				<address>
     				<strong>Billed To:</strong><br>
-    					John Smith<br>
+    					{{factura.cliente}}<br>
     					1234 Main<br>
     					Apt. 4B<br>
     					Springfield, ST 54321
@@ -26,13 +26,13 @@
     				<address>
     					<strong>Payment Method:</strong><br>
     					Visa ending **** 4242<br>
-    					jsmith@email.com
+    					{{factura.mailcliente}}
     				</address>
     			</div>
     			<div class="col-md-6 text-right">
     				<address>
     					<strong>Order Date:</strong><br>
-    					March 7, 2014<br><br>
+    					{{factura.fecha}}<br><br>
     				</address>
     			</div>
     		</div>
@@ -51,49 +51,21 @@
     						<thead>
                                 <tr>
         							<td><strong>Item</strong></td>
-        							<td class="text-center"><strong>Price</strong></td>
-        							<td class="text-center"><strong>Quantity</strong></td>
+        							<td class="text-center"><strong>Categoria</strong></td>
+        							<td class="text-center"><strong>Precio</strong></td>
         							<td class="text-right"><strong>Totals</strong></td>
                                 </tr>
     						</thead>
     						<tbody>
+
     							<!-- foreach ($order->lineItems as $line) or some such thing here -->
-    							<tr>
-    								<td>BS-200</td>
-    								<td class="text-center">$10.99</td>
-    								<td class="text-center">1</td>
-    								<td class="text-right">$10.99</td>
+    							<tr *ngFor="let item of arrayFactura">
+    								<td>{{item.producto}}</td>
+    								<td class="text-center">{{item.categoria}}</td>
+    								<td class="text-center">{{item.precio}}</td>
+    								<td class="text-right">{{item.precio}}</td>
     							</tr>
-                                <tr>
-        							<td>BS-400</td>
-    								<td class="text-center">$20.00</td>
-    								<td class="text-center">3</td>
-    								<td class="text-right">$60.00</td>
-    							</tr>
-                                <tr>
-            						<td>BS-1000</td>
-    								<td class="text-center">$600.00</td>
-    								<td class="text-center">1</td>
-    								<td class="text-right">$600.00</td>
-    							</tr>
-    							<tr>
-    								<td class="thick-line"></td>
-    								<td class="thick-line"></td>
-    								<td class="thick-line text-center"><strong>Subtotal</strong></td>
-    								<td class="thick-line text-right">$670.99</td>
-    							</tr>
-    							<tr>
-    								<td class="no-line"></td>
-    								<td class="no-line"></td>
-    								<td class="no-line text-center"><strong>Shipping</strong></td>
-    								<td class="no-line text-right">$15</td>
-    							</tr>
-    							<tr>
-    								<td class="no-line"></td>
-    								<td class="no-line"></td>
-    								<td class="no-line text-center"><strong>Total</strong></td>
-    								<td class="no-line text-right">$685.99</td>
-    							</tr>
+                                <!-- foreach ($order->lineItems as $line) or some such thing here -->
     						</tbody>
     					</table>
     				</div>

@@ -33,7 +33,7 @@ categoryRouter.get('/getCategory/:id', async function (req, res) {
 categoryRouter.get('/getCategory', async function (req, res) {
   if (database) {
 
-    var query = "select * from category where cstate = 1";
+    var query = "select * from category where cstate = 1 ORDER BY ID ASC";
 
     let result = await database.Open(query, [], false);
 

@@ -23,7 +23,8 @@ denunceRouter.get('/denuncias', async function (req, res) {
     "person.photo from denunce "+
     "JOIN Person on denunce.idperson = person.id "+
     "JOIN Product on denunce.idproduct = product.id "+
-    "where isblocked = 0";
+    "where isblocked = 0 " +
+    "ORDER BY DATES ASC";
 
     let result = await database.Open(query, [], false);
 
@@ -90,7 +91,7 @@ denunceRouter.put('/denuncias/:id', async (req, res) => {
 
   if (result.rowsAffected > 0) {
      
-    let querys = "CALL add_log('" + "Se elimino la denuncia con ID:" + id + " ahora su nombre es " + name + "', 'admin')";
+    let querys = "CALL add_log('" + "Se elimino la denuncia con ID:" + id + "', 'admin')";
     let r = await database.Open(querys, [], true);
 
     res.json({

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { FacturaService } from '../../../../services/factura.service';
 
 @Component({
   selector: 'app-invoice',
@@ -6,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./invoice.component.css']
 })
 export class InvoiceComponent implements OnInit {
-
-  constructor() { }
+  arrayFacturas = []
+  constructor(private service: FacturaService, private router:Router) { 
+    this.inicializar()
+  }
 
   ngOnInit(): void {
+  }
+
+  inicializar(){
+    this.service.getAll(localStorage.getItem('id')).subscribe(data => {
+      this.arrayFacturas = data
+    })
+  }
+
+  getFactura(id:any) {
+    this.router.navigate(['/dashboard/client/invoice/', id])
   }
 
 }

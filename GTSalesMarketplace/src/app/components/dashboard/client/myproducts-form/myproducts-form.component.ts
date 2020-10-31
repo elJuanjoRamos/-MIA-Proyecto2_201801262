@@ -117,7 +117,8 @@ export class MyproductsFormComponent implements OnInit {
           "idcategory" : this.productForm.value.idcategory,
           "idperson": localStorage.getItem('id'),
           "photo": res.filename,
-          "reserv": p
+          "reserv": p,
+          "mail"  : localStorage.getItem('mail')
         }
         if (this.uri == 'gestion') {
           this.service.post(prod).subscribe(data => {

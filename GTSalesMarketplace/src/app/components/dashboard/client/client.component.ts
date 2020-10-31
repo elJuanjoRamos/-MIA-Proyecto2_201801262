@@ -16,5 +16,8 @@ export class ClientComponent implements OnInit {
   gohome(){
     this.router.navigate(['/dashboard/client/homeclient/', localStorage.getItem('id')])
   }
-
+  salir(){
+    localStorage.clear()
+    this.router.navigate(['/login'])
+  }
 }

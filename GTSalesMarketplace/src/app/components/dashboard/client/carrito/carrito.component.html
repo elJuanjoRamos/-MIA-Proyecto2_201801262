@@ -13,45 +13,47 @@
   </div>
 <br>
 
-<div class="table-responsive">
+<div class="container">
+    <div class="table-responsive">
 
 
 
-    <h2>Productos en mi carrito</h2>
-
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th>#</th>
-                <th>Producto</th>
-                <th>Detalle</th>
-                <th>Precio</th>
-                <th>Categoria</th>
-                <th>Vendedor</th>
-                <th>Correo Vendedor</th>
-                <th>Opciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let c of arrayCarrito">
-                <td scope="row">{{ c.id }}</td>
-                <td>{{ c.producto }}</td>
-                <td>{{ c.detalle }}</td>
-                <td>{{ c.precio }}</td>
-                <td>{{ c.categoria }}</td>
-                <td>{{ c.vendedor }}</td>
-                <td>{{ c.mailvendedor }}</td>
-                <td>
-                    <button (click)="delete(c.id)" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                </td>
-            </tr>
-        </tbody>
-      </table>
-      <br>
-
-
-
-
-
-
+        <h2>Productos en mi carrito</h2>
+    
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Producto</th>
+                    <th>Detalle</th>
+                    <th>Precio</th>
+                    <th>Categoria</th>
+                    <th>Vendedor</th>
+                    <th>Correo Vendedor</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let c of arrayCarrito">
+                    <td scope="row">{{ c.id }}</td>
+                    <td>{{ c.producto }}</td>
+                    <td>{{ c.detalle }}</td>
+                    <td>{{ c.precio }}</td>
+                    <td>{{ c.categoria }}</td>
+                    <td>{{ c.vendedor }}</td>
+                    <td>{{ c.mailvendedor }}</td>
+                    <td>
+                        <button (click)="delete(c.id)" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+          </table>
+          <br>
+    
+    
+    
+    
+    
+    
+    </div>
 </div>

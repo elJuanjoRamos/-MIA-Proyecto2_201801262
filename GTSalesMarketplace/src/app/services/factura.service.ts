@@ -11,7 +11,11 @@ export class FacturaService {
 
     constructor(private http: HttpClient) { }
 
-    
+    getAll(id: any) {
+        return this.http.get<any>(`${this.URI}/gfactura/${id}`).pipe(map(data => {
+                return data;
+            }));
+    }
     getFactura(id: any) {
         return this.http.get<any>(`${this.URI}/factura/${id}`).pipe(map(data => {
                 return data;

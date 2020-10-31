@@ -5,6 +5,42 @@ var facturaRouter = express.Router();
 var database = require("../config/database.config");
 
 
+//  Get TODAS LAS FATCTURAS DEL CLIENTE
+facturaRouter.get('/gfactura/:id', async function (req, res) {
+
+    if (database) {
+        const { id } = req.params;
+        var query =
+            "SELECT * from factura where idCliente = :id";
+
+        let result = await database.Open(query, [id], true);
+        
+        if (result.rows.length > 0) {
+
+            FACTURAS = [];
+            result.rows.map(cat => {
+                let Schema = {  
+                    "id": cat[0],
+                    "fecha": cat[1],
+                    "total": cat[2],
+                    "cliente": cat[3],
+                    "mailcliente": cat[4],
+                    "idcliente": cat[5]
+                }
+                FACTURAS.push(Schema);
+
+            });
+
+            res.json(FACTURAS)
+        } else {
+            res.json([])
+        }
+
+    } else {
+        console.log("error")
+    }
+});
+
 
 //  POST FACTURA
 facturaRouter.post('/factura', async function (req, res) {
@@ -56,44 +92,42 @@ facturaRouter.post('/detalle', async function (req, res) {
 
 
 
-//  Get CARRITO
+//  Get Factura
 facturaRouter.get('/factura/:id', async function (req, res) {
 
     if (database) {
         const { id } = req.params;
         var query =
-            "select factura.id, concat(concat(person.name, ' '), person.lastname) as comprador, person.mail as mailcomprador, product.name, product.detail, product.price, " +
-            "(select name from category where id = product.idcategory) as categoria, " +
-            "concat(concat((select person.name from person where id = product.idperson), ' '), (select person.lastname from person where id = product.idperson))  as vendedor, " +
-            "(select person.mail from person where id = product.idperson) as mailvendedor, " +
-            "product.idperson " +
-            "from factura " +
-            "JOIN PERSON ON factura.idperson =PERSON.id JOIN PRODUCT ON factura.idproduct = PRODUCT.id " +
-            "where factura.idperson = :id and estado = 1";
+         "select product.name,product.price, (select name from category where id = product.idcategory) as cat, "+
+         "factura.cliente, factura.mailcliente, factura.fecha " + 
+          "from detallefactura " + 
+          "join carrito on detallefactura.idcarrito = carrito.id " +
+          "join product on carrito.idproduct   = product.id " +
+          "JOIN factura on detallefactura.idfactura = factura.id " +
+          "where idfactura = :id"           
 
         let result = await database.Open(query, [id], true);
+        
         if (result.rows.length > 0) {
-            PRODUCTS = []
 
+            FACTURAS = [];
             result.rows.map(cat => {
-                let Schema = {
-                    "id": cat[0],
-                    "comprador": cat[1],
-                    "mailcomprador": cat[2],
-                    "producto": cat[3],
-                    "detalle": cat[4],
-                    "precio": cat[5],
-                    "categoria": cat[6],
-                    "vendedor": cat[7],
-                    "mailvendedor": cat[8],
-                    "idvendedor": cat[9]
+                let Schema = {  
+                    "producto": cat[0],
+                    "precio": cat[1],
+                    "categoria": cat[2],
+                    "cliente": cat[3],
+                    "mailcliente": cat[4],
+                    "fecha": cat[5]
                 }
-                PRODUCTS.push(Schema);
+                FACTURAS.push(Schema);
+
             });
 
-            res.json(PRODUCTS)
+            res.json(FACTURAS)
+        } else {
+            res.json([])
         }
-
 
     } else {
         console.log("error")
@@ -101,7 +135,7 @@ facturaRouter.get('/factura/:id', async function (req, res) {
 });
 
 
-//  Get CARRITO
+
 facturaRouter.delete('/factura/:id', async function (req, res) {
 
     if (database) {

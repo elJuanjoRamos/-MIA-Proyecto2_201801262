@@ -39,6 +39,7 @@ import { AdenunciaComponent } from './components/dashboard/adminn/adenuncia/aden
 import { CarritoComponent } from './components/dashboard/client/carrito/carrito.component';
 import { InvoiceComponent } from './components/dashboard/client/invoice/invoice.component';
 import { InvoiceDetailComponent } from './components/dashboard/client/invoice-detail/invoice-detail.component';
+import { LogComponent } from './components/dashboard/adminn/log/log.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { InvoiceDetailComponent } from './components/dashboard/client/invoice-de
     CarritoComponent,
     InvoiceComponent,
     InvoiceDetailComponent,
+    LogComponent,
   ],
   imports: [
     BrowserModule,

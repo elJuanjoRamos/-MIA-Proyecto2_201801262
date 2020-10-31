@@ -11,7 +11,7 @@ var database = require("../config/database.config");
 loggRouter.get('/getlogg/', async function (req, res) {
   if (database) {
   
-    var query = "select * from logg";
+    var query = "select * from logg ORDER BY ID DESC";
 
     let result = await database.Open(query, [id], false);
   
@@ -19,7 +19,9 @@ loggRouter.get('/getlogg/', async function (req, res) {
     result.rows.map(cat => {
       let loggSchema = {
         "id": cat[0],
-        "name": cat[1]
+        "descripcion": cat[1],
+        "correo": cat[2],
+        "fecha": cat[3],
       }
       LOGG.push(loggSchema)
     });
