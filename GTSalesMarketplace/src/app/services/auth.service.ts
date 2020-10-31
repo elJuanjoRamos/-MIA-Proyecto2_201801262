@@ -46,12 +46,12 @@ export class AuthenticationService {
                     let token = JSON.parse(JSON.stringify(res.json())).token;
                     let rol = JSON.parse(JSON.stringify(res.json())).idtipe;
                     let iduser = JSON.parse(JSON.stringify(res.json())).id;
-
+                    console.log(res.json())
                     //if (token) {
                     localStorage.setItem('id', JSON.parse(JSON.stringify(res.json())).id);
+                    localStorage.setItem('mail', JSON.parse(JSON.stringify(res.json())).mail);
                     localStorage.setItem('token', token);
                     localStorage.setItem('user', JSON.stringify(res.json()))
-
 
                     if (rol === 1) {
                         this.router.navigate(['/dashboard/admin/home']);

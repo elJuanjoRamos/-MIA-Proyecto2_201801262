@@ -7,6 +7,9 @@ import { MyproductsFormComponent } from './myproducts-form/myproducts-form.compo
 import { ProductsComponent } from './products/products.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { DenunciaComponent } from './denuncia/denuncia.component';
+import { CarritoComponent } from './carrito/carrito.component';
+import { InvoiceComponent } from './invoice/invoice.component';
+import { InvoiceDetailComponent } from './invoice-detail/invoice-detail.component';
 
 export const client_routes: Routes = [
     { path: 'homeclient/:id', component: ChomeComponent },
@@ -15,6 +18,9 @@ export const client_routes: Routes = [
     { path: 'products', component: ProductsComponent },
     { path: 'products/:id', component: ProductDetailComponent },
     { path: 'denuncia/:id', component: DenunciaComponent },
+    { path: 'carrito', component: CarritoComponent },
+    { path: 'invoice/:id', component:  InvoiceDetailComponent},
+    { path: 'invoice', component:  InvoiceComponent},
     
 //    { path: 'admin/asignacionauxiliar', component: AsignacionAuxiliar },
 //   { path: 'admin/asignacionauxiliar/:id', component: AsignacionForm },

@@ -14,7 +14,7 @@ export class ChomeComponent implements OnInit {
   validar: boolean = false;
   submitted = false;
   localUrl: any;
-  file:any;
+  file:any = null; 
   /////
   nombrecompleto:any
   credito:any
@@ -80,7 +80,8 @@ export class ChomeComponent implements OnInit {
               'mail': new FormControl(this.userLogeado.mail, Validators.required),
               'credit': new FormControl(this.userLogeado.credit, Validators.required),
               'activo': new FormControl(this.userLogeado.activo, Validators.required),
-              'idtipe': new FormControl(this.userLogeado.idtipe, Validators.required)
+              'idtipe': new FormControl(this.userLogeado.idtipe, Validators.required),
+              'photo' :new FormControl(this.userLogeado.photo)
             });
           });
     });
@@ -96,23 +97,27 @@ export class ChomeComponent implements OnInit {
     this.submitted = true;
     // stop here if form is invalid
     if (this.usrForm.invalid) {
+
       return;
     }
-    const formData = new FormData();
-    formData.append('file', this.file);
 
-   this.service.postImage(formData).subscribe((res) => {
-    this.usrForm.value.photo = res.filename;
+    if (this.file != null) {
+      
+      const formData = new FormData();
+      formData.append('file', this.file);
+
+      this.service.postImage(formData).subscribe((res) => {
+        this.usrForm.value.photo = res.filename;
+      },
+      (err) => console.log(err)
+      ); 
+        
+    } 
     this.service.put(this.usrForm.value, this.uri).subscribe(res => {
       setTimeout(() => {
         this.router.navigate(['/dashboard/client/homeclient/', this.uri]);
       }, 2000); 
     });
-
-   },
-   (err) => console.log(err)
-   ); 
-    
   }
 
 

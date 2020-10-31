@@ -21,6 +21,9 @@ import { PersonService } from './services/person.service';
 import { ProductService } from './services/product.service';
 import { LikeService } from './services/like.service';
 import { ComentarioService } from './services/comentario.service';
+import { LoggService } from './services/log.service';
+import { CarritoService } from './services/carrito.service';
+import { FacturaService } from './services/factura.service';
 
 
 
@@ -33,6 +36,9 @@ import { ProductsComponent } from './components/dashboard/client/products/produc
 import { ProductDetailComponent } from './components/dashboard/client/product-detail/product-detail.component';
 import { DenunciaComponent } from './components/dashboard/client/denuncia/denuncia.component';
 import { AdenunciaComponent } from './components/dashboard/adminn/adenuncia/adenuncia.component';
+import { CarritoComponent } from './components/dashboard/client/carrito/carrito.component';
+import { InvoiceComponent } from './components/dashboard/client/invoice/invoice.component';
+import { InvoiceDetailComponent } from './components/dashboard/client/invoice-detail/invoice-detail.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +56,9 @@ import { AdenunciaComponent } from './components/dashboard/adminn/adenuncia/aden
     ProductDetailComponent,
     DenunciaComponent,
     AdenunciaComponent,
+    CarritoComponent,
+    InvoiceComponent,
+    InvoiceDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +74,10 @@ import { AdenunciaComponent } from './components/dashboard/adminn/adenuncia/aden
     PersonService,
     ProductService,
     LikeService,
-    ComentarioService
+    ComentarioService,
+    LoggService,
+    CarritoService,
+    FacturaService
   ],
   bootstrap: [AppComponent]
 })

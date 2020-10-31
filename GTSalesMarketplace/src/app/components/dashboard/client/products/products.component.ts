@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../../services/product.service';
-import { LikeService } from '../../../../services/like.service';
+import { CarritoService } from '../../../../services/carrito.service';
 import { CategoryService } from '../../../../services/category.service';
 import { Router } from '@angular/router';
 @Component({
@@ -15,9 +15,10 @@ export class ProductsComponent implements OnInit {
   like:string = "https://pngimage.net/wp-content/uploads/2018/06/wishlist-icon-png-3.png";
   localUrl:string = "https://static.thenounproject.com/png/635650-200.png";
   resultado: boolean = false;
+  visible: boolean = false;
   searchText;
   constructor(private service:ProductService, private catsetvice: CategoryService, 
-    private router: Router) { 
+    private router: Router, private carritoService: CarritoService) { 
     this.inicializar()
   }
 
@@ -59,5 +60,19 @@ export class ProductsComponent implements OnInit {
         this.arrayProductos = data;
       });
     }
+  }
+  carrito(id) {
+    var data = {
+      "idperson"  : localStorage.getItem('id'),
+      "idproduct" : id,
+      "mail"      : localStorage.getItem('mail')
+    }
+
+    this.carritoService.post(data).subscribe(data => {
+      this.visible = true;
+      setTimeout(()=> {
+        this.visible = false
+      }, 2000)
+    })
   }
 }

@@ -27,6 +27,10 @@
       </div>
     </div>
     <br>
+    <div class="alert alert-primary" *ngIf="visible" role="alert">
+      Agregaste el producto a tu carrito
+    </div>
+    <br>
     <div class="product-list">
       <div class="row">
         
@@ -43,7 +47,7 @@
               <div class="price">
                 <span class="rupee-icon">Q</span> {{i.price}} 
               </div>
-              <a href="#" class="blue-btn">Comprar</a>
+              <a (click)="carrito(i.id)" style="color: white;" class="blue-btn">Comprar</a>
               <a (click)="detalles(i.id)" style="color: white;" type="button"    class="blue-btn">Detalles</a>
             </div>
           </div>

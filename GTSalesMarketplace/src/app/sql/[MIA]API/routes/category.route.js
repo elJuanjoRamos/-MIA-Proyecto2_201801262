@@ -8,10 +8,32 @@ var database = require("../config/database.config");
 ////TABLA category
 
 //  GET
+categoryRouter.get('/getCategory/:id', async function (req, res) {
+  if (database) {
+    const { id } = req.params;
+  
+    var query = "select * from category where id=:id";
+
+    let result = await database.Open(query, [id], false);
+  
+    let categorySchema;
+    result.rows.map(cat => {
+      categorySchema = {
+        "id": cat[0],
+        "name": cat[1]
+      }
+    });
+    res.json(categorySchema);
+  }
+
+});
+
+
+//  GET
 categoryRouter.get('/getCategory', async function (req, res) {
   if (database) {
 
-    var query = "select * from category";
+    var query = "select * from category where cstate = 1";
 
     let result = await database.Open(query, [], false);
 
@@ -37,13 +59,18 @@ categoryRouter.post('/icategory', async function (req, res) {
 
     const { name } = req.body;
     
-    var query = "insert into category(name) values (:name)";
+    var query = "insert into category(name, cstate) values (:name, 1)";
 
-    await database.Open(query, [name], true);
+    let result = await database.Open(query, [name], true);
 
-    res.status(200).json({
-      "name": name
-    });
+    if (result.rowsAffected > 0) {
+      let querys = "CALL add_log('" + "Se agrego la categoria " + name + "', 'admin')";
+      let r = await database.Open(querys, [], true);
+      res.status(200).json({
+        "name": name
+      });
+    }
+    
   } else {
     console.log("error")
   }
@@ -56,13 +83,15 @@ categoryRouter.post('/icategory', async function (req, res) {
 categoryRouter.delete('/dcategory/:id', async (req, res) => {
   const { id } = req.params;
 
-  let query = "delete from category where id =:id";
+  let query = "update category set cstate=0 where id =:id";
 
   let result = await database.Open(query, [id], true);
 
 
   if (result.rowsAffected > 0) {
-    
+    let querys = "CALL add_log('" + "Se elimino la categoria con ID:" + id + "', 'admin')";
+    let r = await database.Open(querys, [], true);
+
     res.json({ "msg": "La categoria se elemino correctamente" })    
   } else{
     res.json({ "msg": "Hubo un problema al eliminar la categoria con id:"  + id })
@@ -73,55 +102,33 @@ categoryRouter.delete('/dcategory/:id', async (req, res) => {
 
 
 //UPDATE
-categoryRouter.put("/ucategory", async (req, res) => {
-  const { i, name } = req.body;
 
 
-  console.log(req.body)
-  var query = "update CATEGORY set name =:name where id =:i";
-  
-  let restult = {}
-  restult = await database.Open(query, [name, i], true);
+//PUT 
+categoryRouter.put('/ucategory/:i', async (req, res) => {
+  const { i } = req.params;
 
-  console.log(restult)
+  const { id, name } = req.body; 
 
-  /*try {
-    
-  } catch (error) {
-    console.log("entro")
-    console.log(error)    
-  }*/
-    
+ 
+  let query = "UPDATE CATEGORY SET name =:name where id =:id";
 
-  return res.json(restult)
+  let result = await database.Open(query, [name, id], true);
 
+  if (result.rowsAffected > 0) {
+    let querys = "CALL add_log('" + "Se actualizo la categoria con ID:" + id + " ahora su nombre es " + name + "', 'admin')";
+    let r = await database.Open(querys, [], true);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*if (restult.rowsAffected > 0) {
-    res.status(200).json({
-      "id": id,
-      "name": name
+    res.json({
+      "messaje": "Funciono"
     });
   } else {
-    res.json({ "msg": "Hubo un problema al actualizar la categoria con id:"  + id })
-  }*/
+    res.json({
+      "messaje": "Error"
+    });
+  }
+});
 
-})
 
 
 module.exports = categoryRouter;

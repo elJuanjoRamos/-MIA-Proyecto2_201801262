@@ -1,61 +1,33 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
     <h1 class="h2">Category</h1>
-    <div class="btn-toolbar mb-2 mb-md-0">
-        <div class="btn-group mr-2">
-            <button class="btn btn-sm btn-outline-secondary">Share</button>
-            <button class="btn btn-sm btn-outline-secondary">Export</button>
-        </div>
-        <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar"></span>
-            This week
-        </button>
-    </div>
 </div>
 <div>
     <div class="row">
         <aside class="col-sm-6">
             <div class="card">
-                <article class="card-body">
-                    <h4 class="card-title text-center mb-4 mt-1">Insertar Categoria</h4>
-                    <hr>
-                    <p class="text-success text-center">Ingrese el nombre de la categoria</p>
+               <article *ngIf="catForm" class="card-body">
+                <h4 class="card-title text-center mb-4 mt-1">Insertar Categoria</h4>
+                <hr>
+                <p class="text-success text-center">Ingrese el nombre de la categoria</p>
+                <form [formGroup]="catForm" role="form" data-parsley-validate="" novalidate="">
                     <div class="form-group">
                         <div class="input-group">
-                            <div class="input-group-prepend"><span class="input-group-text"><i
-                                        class="fa fa-user"></i></span></div><input 
-                                placeholder="Nombre de la categoria" type="text" #name class="form-control">
+                            <input hidden type="text" formControlName="id" value="0">
+                                
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                            </div>
+                                <input formControlName="name" placeholder="Nombre de la categoria" type="text" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" class="form-control">
+                        </div>
+                        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                            <div *ngIf="f.name.errors.required">Nombre es requerido</div>
                         </div>
                     </div>
-                    <div class="form-group"><button type="submit" (click)="save(name.value)" class="btn btn-primary btn-block"> Save </button>
+                    <div class="form-group">
+                        <button type="submit" (click)="onSubmit()"class="btn btn-primary btn-block"> Save </button>
                     </div>
-                </article>
-            </div>
-        </aside>
-        <aside class="col-sm-6">
-            <div class="card">
-                <article class="card-body">
-                    <h4 class="card-title text-center mb-4 mt-1">Sign in</h4>
-                    <hr>
-                    <p class="text-success text-center">Some message goes here</p>
-                    <form>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend"><span class="input-group-text"><i
-                                            class="fa fa-user"></i></span></div><input name=""
-                                    placeholder="Email or login" type="email" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend"><span class="input-group-text"><i
-                                            class="fa fa-lock"></i></span></div><input placeholder="******"
-                                    type="password" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group"><button type="submit" class="btn btn-primary btn-block"> Login </button>
-                        </div>
-                    </form>
-                </article>
+                </form>
+               </article>
             </div>
         </aside>
     </div>
@@ -83,7 +55,7 @@
                 <td scope="row">{{ c.id }}</td>
                 <td>{{ c.name }}</td>
                 <td>
-                    <button href="#" class="btn btn-warning"><i class="fas fa-edit"></i></button> | 
+                    <button (click)="update(c.id)" class="btn btn-warning"><i class="fas fa-edit"></i></button> | 
                     <button (click)="delete(c.id)" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                 </td>
             </tr>

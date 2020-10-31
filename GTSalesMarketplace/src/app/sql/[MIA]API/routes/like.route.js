@@ -10,10 +10,10 @@ var database = require("../config/database.config");
 categoryRouter.post('/like', async function (req, res) {
   
   if (database) {
-    const { idperson, idproduct } = req.body;
-    var query = "call insert_like(:idproduct, :idperson)";
+    const { idperson, idproduct, mail } = req.body;
+    var query = "call insert_like(:idproduct, :idperson, :mail)";
 
-    let result = await database.Open(query, [idproduct, idperson], true);
+    let result = await database.Open(query, [idproduct, idperson, mail], true);
     
     res.status(200).json({
       "like": true 
@@ -31,10 +31,10 @@ categoryRouter.post('/dislike', async function (req, res) {
   
   if (database) {
 
-    const { idperson, idproduct } = req.body;
-    var query = "call insert_dislike(:idproduct, :idperson)";
+    const { idperson, idproduct, mail } = req.body;
+    var query = "call insert_dislike(:idproduct, :idperson, :mail)";
 
-    let result = await database.Open(query, [idproduct, idperson], true);
+    let result = await database.Open(query, [idproduct, idperson, mail], true);
     res.status(200).json({
       "like": true 
     });

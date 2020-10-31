@@ -169,6 +169,34 @@ usrRout.put('/person/:i', async (req, res) => {
 
 
 
+//PUT CLIENTE
+usrRout.put('/credit/:i', async (req, res) => {
+  const { i } = req.params;
+  const { precio, estado } = req.body;
+
+
+ 
+  let query = "";
+  if (estado == 1) {
+    query = "update person set credit=(credit + "+ precio+") where person.id = " + i;
+  } else {
+    query = "update person set credit=(credit - "+ precio+") where person.id = " + i;
+  }
+
+  let result = await database.Open(query, [], true);
+
+  if (result.rowsAffected > 0) {
+
+    res.json({ "msg": "La categoria se elemino correctamente" })    
+  } else{
+    res.json({ "msg": "Hubo un problema al eliminar la categoria con id:"  + id })
+  }
+});
+
+
+
+
+
 
 // DELETE PERSON
 

@@ -68,7 +68,8 @@ export class DenunciaComponent implements OnInit {
       "idperson"   : localStorage.getItem('id'),
       "idproduct"  : this.uri,
       "descripcion" : this.productForm.value.mensaje,
-      "fecha"      : today
+      "fecha"      : today,
+      "mail"      : localStorage.getItem('mail')
     }
     this.comentService.postDenuncia(data).subscribe(d => {
       this.router.navigate(['dashboard/client/products'])

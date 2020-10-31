@@ -9,7 +9,7 @@ import { AdenunciaComponent } from './adenuncia/adenuncia.component'
 export const admin_routes: Routes = [
     //{ path: 'admin', component: AdminnComponent },
     { path: 'home', component: HomeComponent },
-    { path: 'category', component: AcategoryComponent },
+    { path: 'category/:id', component: AcategoryComponent },
     { path: 'denuncia', component: AdenunciaComponent },
 //    { path: 'admin/detallecurso', component: DetalleCursoComponent },
 //    { path: 'admin/detallecurso/:id', component: DetalleCursoFormComponent },

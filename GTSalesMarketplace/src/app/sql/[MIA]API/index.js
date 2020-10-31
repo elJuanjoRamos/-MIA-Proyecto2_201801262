@@ -34,6 +34,9 @@ var file = require('./routes/file.route');
 var comentario = require('./routes/comentario.route');
 var denuncia = require('./routes/denunce.routes');
 var mail = require('./routes/mail.route');
+var logg = require('./routes/log.route');
+var carrito = require('./routes/carrito.route');
+var factura = require('./routes/factura.route');
 
 
 const { strict } = require('assert');
@@ -51,6 +54,9 @@ app.use('/', likes);
 app.use('/', comentario);
 app.use('/', denuncia);
 app.use('/', mail)
+app.use('/', logg)
+app.use('/', carrito)
+app.use('/', factura)
 
 app.listen(port, function() {
     console.log('El servidor corre en el puerto:' + port)

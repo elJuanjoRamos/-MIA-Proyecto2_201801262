@@ -57,13 +57,17 @@ denunceRouter.get('/denuncias', async function (req, res) {
 //POST 
 denunceRouter.post('/denuncias', async function (req, res) {
     if (database) {
-      const { idperson, idproduct, descripcion, fecha } = req.body;  
+      const { idperson, idproduct, descripcion, fecha, mail } = req.body;  
       var query = "INSERT INTO DENUNCE(isblocked, descripcion, dates, idperson, idproduct) " + 
       "VALUES(0, :descripcion, :fecha, :idperson, :idproduct)";
   
         let resultado = await database.Open(query, [descripcion, fecha, idperson, idproduct], true);
   
         if (resultado.rowsAffected > 0) {
+
+          var texto = "'El usuario con email " + mail + " agrego una denuncia al producto " + idproduct + "'";
+          let querys = "CALL add_log(" + texto + ", '"+mail+"')";
+          let r = await database.Open(querys, [], true);
           res.status(200).json({
             "messaje": "Insertado correctamente"
           });
@@ -86,6 +90,9 @@ denunceRouter.put('/denuncias/:id', async (req, res) => {
 
   if (result.rowsAffected > 0) {
      
+    let querys = "CALL add_log('" + "Se elimino la denuncia con ID:" + id + " ahora su nombre es " + name + "', 'admin')";
+    let r = await database.Open(querys, [], true);
+
     res.json({
       "messaje": "Funciono",
       "state" : true

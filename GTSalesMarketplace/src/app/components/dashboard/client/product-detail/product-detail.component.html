@@ -3,8 +3,11 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
     <h1 class="h2">Detalle de producto</h1>
 </div>
-
-
+<br>
+<div class="alert alert-primary" *ngIf="visible2" role="alert">
+    Agregaste el producto a tu carrito
+  </div>
+<br>
 <div class="container" *ngIf="producto">
     <div class="row" >
         <div class="col-md-6">
@@ -39,7 +42,7 @@
                 <p></p>
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <button (click)="denuncia(producto.id)"  class="btn round-black-btn">Denunciar</button>
-                    <button   class="btn round-black-btn">Agregar al carrito</button>
+                    <button  (click)="carrito(producto.id)" class="btn round-black-btn">Agregar al carrito</button>
                 </div>
 
                 <div class="btn-group" role="group" aria-label="Basic example">

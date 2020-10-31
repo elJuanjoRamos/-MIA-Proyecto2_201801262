@@ -52,4 +52,11 @@ export class PersonService {
     sendMessage(body) {
         return this.http.post(`${this.URI}/formulario`, body);
     }
+    putCredit(any:any, id:any) {
+        let data = JSON.stringify(any);
+        var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token')});
+        return this.http.put(`${this.URI}/credit/${id}`, data, { headers }).pipe(map(data => {
+            return data;
+        }));
+    }
 }

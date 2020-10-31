@@ -5,25 +5,21 @@ import { map } from 'rxjs/operators';
 
 
 @Injectable( /*{ providedIn: 'root' }*/)
-export class CategoryService {
+export class FacturaService {
     URI = 'http://localhost:3000';
     headers = new HttpHeaders({'Content-Type': 'application/json','Authorization': localStorage.getItem('token')});
 
     constructor(private http: HttpClient) { }
 
-    getAll() {
-        return this.http.get<any[]>(`${this.URI}/getCategory`).pipe(map(data => {
-            return data;
-            }));
-    }
-    getCategory(id: any) {
-        return this.http.get<any>(`${this.URI}/getCategory/${id}`).pipe(map(data => {
+    
+    getFactura(id: any) {
+        return this.http.get<any>(`${this.URI}/factura/${id}`).pipe(map(data => {
                 return data;
             }));
     }
     delete(id:any) {
         var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token')});
-        return this.http.delete(`${this.URI}/dcategory/${id}`, { headers }).pipe(map(data => {
+        return this.http.delete(`${this.URI}/factura/${id}`, { headers }).pipe(map(data => {
             return data;
         }));
     }
@@ -31,15 +27,18 @@ export class CategoryService {
         
         let data = JSON.stringify(any);        
         var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token')});
-        return this.http.post(`${this.URI}/icategory/`, data, { headers }).pipe(map(data => {
+        return this.http.post(`${this.URI}/factura/`, data, { headers }).pipe(map(data => {
             return data;
         }));
     }
-    put(any:any, id:any) {
-        let data = JSON.stringify(any);
-        var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('id')});
-        return this.http.put(`${this.URI}/ucategory/${id}`, data, { headers }).pipe(map(data => {
+
+    postdetalle(any:any) {
+        
+        let data = JSON.stringify(any);        
+        var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token')});
+        return this.http.post(`${this.URI}/detalle/`, data, { headers }).pipe(map(data => {
             return data;
         }));
     }
+
 }

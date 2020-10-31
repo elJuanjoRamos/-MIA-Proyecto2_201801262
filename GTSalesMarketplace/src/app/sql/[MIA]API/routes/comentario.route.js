@@ -42,14 +42,18 @@ comentarioRoute.get('/comentarios/:id', async (req, res) => {
 //POST 
 comentarioRoute.post('/comentarios', async function (req, res) {
   if (database) {
-    console.log(req.body)
-    const { idperson, idproduct, comentario, fecha } = req.body;  
+    const { idperson, idproduct, comentario, fecha, mail } = req.body;  
     var query = "INSERT INTO COMENT_PRODUCT(idperson, idproduct, coment, fecha) " + 
     "VALUES(:idperson, :idproduct, :comentario, :fecha)";
 
       let resultado = await database.Open(query, [idperson, idproduct, comentario, fecha], true);
-
+      
       if (resultado.rowsAffected > 0) {
+        var texto = "'El usuario con email " + mail + " agrego un comentario al producto " + idproduct + "'";
+        let querys = "CALL add_log(" + texto + ", '"+mail+"')";
+        let r = await database.Open(querys, [], true);
+
+
         res.status(200).json({
           "messaje": "Insertado correctamente"
         });

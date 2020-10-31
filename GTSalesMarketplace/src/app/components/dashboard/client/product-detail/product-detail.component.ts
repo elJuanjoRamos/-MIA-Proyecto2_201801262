@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../../../services/product.service';
 import { ComentarioService } from '../../../../services/comentario.service';
 import { LikeService } from '../../../../services/like.service';
+import { CarritoService } from '../../../../services/carrito.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -21,9 +22,10 @@ export class ProductDetailComponent implements OnInit {
   submitted = false;
   idUser:any;
   visible = false;
+  visible2 = false;
   type = 'primary';
   mensaje = '';
-  constructor(private service: ProductService, private formBuilder: FormBuilder, private sanitizer:DomSanitizer,
+  constructor(private service: ProductService, private formBuilder: FormBuilder, private sanitizer:DomSanitizer, private carritoservice:CarritoService,
     private activatedRoute: ActivatedRoute, private likesevice: LikeService, private router: Router, private comentarioService: ComentarioService) { 
 
 
@@ -73,7 +75,8 @@ export class ProductDetailComponent implements OnInit {
       "idperson"   : localStorage.getItem('id'),
       "idproduct"  : this.uri,
       "comentario" : this.productForm.value.mensaje,
-      "fecha"      : today
+      "fecha"      : today,
+      "mail"       : localStorage.getItem('mail')
     }
     this.comentarioService.post(data).subscribe(res => {
         setTimeout(() => {
@@ -91,7 +94,8 @@ export class ProductDetailComponent implements OnInit {
   addlike(id){
     var data = {
       'idperson' : this.idUser,
-      'idproduct': id
+      'idproduct': id,
+      'mail'  : localStorage.getItem('mail')
     }
     this.likesevice.postlike(data).subscribe(d => {
       this.likesevice.getlike(data).subscribe(d1 =>{
@@ -106,7 +110,8 @@ export class ProductDetailComponent implements OnInit {
   adddislike(id){
     var data = {
       'idperson' : this.idUser,
-      'idproduct': id
+      'idproduct': id,
+      'mail'  : localStorage.getItem('mail')
     }
     this.likesevice.postdislike(data).subscribe(d => {
       this.likesevice.getdislike(data).subscribe(d1 =>{
@@ -115,6 +120,21 @@ export class ProductDetailComponent implements OnInit {
         this.mostar(result.message, true, result.type)
       });
       
+    })
+  }
+
+  carrito(id) {
+    var data = {
+      "idperson"  : localStorage.getItem('id'),
+      "idproduct" : id,
+      "mail"      : localStorage.getItem('mail')
+    }
+
+    this.carritoservice.post(data).subscribe(data => {
+      this.visible2 = true;
+      setTimeout(()=> {
+        this.visible2 = false
+      }, 2000)
     })
   }
 
@@ -132,6 +152,5 @@ export class ProductDetailComponent implements OnInit {
     setTimeout (() => {
       this.visible = false;    
    }, 5000);
-
   }
 }

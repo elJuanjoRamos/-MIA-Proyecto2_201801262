@@ -1,0 +1,57 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">Mi Carito</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+            <button (click)="comprar()" class="btn btn-sm btn-outline-secondary">Comprar</button>
+        </div>
+    </div>
+</div>
+
+<br>
+<div class="alert alert-danger" *ngIf="visible" role="alert">
+    No cuentas con fondos suficients
+  </div>
+<br>
+
+<div class="table-responsive">
+
+
+
+    <h2>Productos en mi carrito</h2>
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Producto</th>
+                <th>Detalle</th>
+                <th>Precio</th>
+                <th>Categoria</th>
+                <th>Vendedor</th>
+                <th>Correo Vendedor</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of arrayCarrito">
+                <td scope="row">{{ c.id }}</td>
+                <td>{{ c.producto }}</td>
+                <td>{{ c.detalle }}</td>
+                <td>{{ c.precio }}</td>
+                <td>{{ c.categoria }}</td>
+                <td>{{ c.vendedor }}</td>
+                <td>{{ c.mailvendedor }}</td>
+                <td>
+                    <button (click)="delete(c.id)" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>
+        </tbody>
+      </table>
+      <br>
+
+
+
+
+
+
+</div>
