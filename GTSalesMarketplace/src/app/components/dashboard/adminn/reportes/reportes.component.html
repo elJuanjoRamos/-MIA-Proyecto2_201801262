@@ -1,0 +1,179 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">Reportes</h1>
+</div>
+
+<br>
+<div class="container">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="rep1-tab" data-toggle="tab" href="#rep1" role="tab" aria-controls="rep1" aria-selected="true">Top 10 de productos más vendidos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="like-tab" data-toggle="tab" href="#like" role="tab" aria-controls="like" aria-selected="false">Top 10 likes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="dislike-tab" data-toggle="tab" href="#dislike" role="tab" aria-controls="dislike" aria-selected="false">Top 10 dislikes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="dislike-tab" data-toggle="tab" href="#credit" role="tab" aria-controls="dislike" aria-selected="false">Top 10 Creditos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="dislike-tab" data-toggle="tab" href="#denuncia" role="tab" aria-controls="dislike" aria-selected="false">Top 10 Denuncia</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="dislike-tab" data-toggle="tab" href="#productos" role="tab" aria-controls="dislike" aria-selected="false">Top 10 Clientes con productos</a>
+          </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="rep1" role="tabpanel" aria-labelledby="rep1-tab">
+
+
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Vendedor</th>
+                    <th scope="col">Veces vendido</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of reporte1">
+                    <th scope="row">{{item.idproducto}}</th>
+                    <td>{{item.producto}}</td>
+                    <td>{{item.nombre}} {{item.apellido}}</td>
+                    <td>{{item.cantidad}}</td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+              
+            
+
+        </div>
+        <div class="tab-pane fade" id="like" role="tabpanel" aria-labelledby="like-tab">
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Vendedor</th>
+                    <th scope="col">Likes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of reporte2">
+                    <th scope="row">{{item.idproducto}}</th>
+                    <td>{{item.producto}}</td>
+                    <td>{{item.nombre}} {{item.apellido}}</td>
+                    <td>{{item.cantidad}}</td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+
+        </div>
+        <div class="tab-pane fade" id="dislike" role="tabpanel" aria-labelledby="dislike-tab">
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Vendedor</th>
+                    <th scope="col">DisLikes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of reporte3">
+                    <th scope="row">{{item.idproducto}}</th>
+                    <td>{{item.producto}}</td>
+                    <td>{{item.nombre}} {{item.apellido}}</td>
+                    <td>{{item.cantidad}}</td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+        </div>
+
+       
+
+        <div class="tab-pane fade" id="credit" role="tabpanel" aria-labelledby="credit-tab">
+
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Fecha Nacimiento</th>
+                <th scope="col">Credito</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of reporte4">
+                <th >{{item.nombre}}</th>
+                <td>{{item.mail}}</td>
+                <td>{{item.fecha}}</td>
+                <td>Q{{item.credit}}</td>
+              </tr>
+              
+            </tbody>
+          </table>
+          
+        </div>
+     
+  
+        <div class="tab-pane fade" id="denuncia" role="tabpanel" aria-labelledby="credit-tab">
+
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Fecha Nacimiento</th>
+                <th scope="col">Cantidad</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of reporte5">
+                <th >{{item.idperson}}</th>
+                <th >{{item.nombre}}</th>
+                <td>{{item.mail}}</td>
+                <td>{{item.fecha}}</td>
+                <td>{{item.cant}}</td>
+              </tr>
+              
+            </tbody>
+          </table>
+
+        </div>
+        <div class="tab-pane fade" id="productos" role="tabpanel" aria-labelledby="credit-tab">
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Credito</th>
+                <th scope="col">Fecha Nacimiento</th>
+                <th scope="col">Productos a la venta</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of reporte6">
+                <th >{{item.idperson}}</th>
+                <th >{{item.nombre}}</th>
+                <td>{{item.mail}}</td>
+                <td>Q{{item.credito}}</td>
+                <td>{{item.fecha}}</td>
+                <td>{{item.cant}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane fade" id="credit3" role="tabpanel" aria-labelledby="credit-tab">...</div>
+        <div class="tab-pane fade" id="credit4" role="tabpanel" aria-labelledby="credit-tab">...</div>
+        <div class="tab-pane fade" id="credit5" role="tabpanel" aria-labelledby="credit-tab">...</div>
+     
+      </div>
+</div>

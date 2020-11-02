@@ -1,5 +1,6 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CarritoService } from '../../../../services/carrito.service';
 import { FacturaService } from '../../../../services/factura.service';
 import { PersonService } from '../../../../services/person.service';
@@ -19,7 +20,8 @@ export class CarritoComponent implements OnInit {
 
   constructor(private service:CarritoService, 
     private person:PersonService,
-    private factura:FacturaService) { 
+    private factura:FacturaService,
+    private router: Router) { 
     this.inicializar()
   }
 
@@ -48,6 +50,8 @@ export class CarritoComponent implements OnInit {
     }
 
 
+
+
     
 
     //le acanza el dinero
@@ -69,6 +73,28 @@ export class CarritoComponent implements OnInit {
         } 
         this.person.putCredit(data, element.idvendedor).subscribe()
       }
+
+      //SE ENVIA MAIL AL COMPRADOR
+
+
+      var table = "<br> <table class=\"table\">  <thead class=\"thead-dark\">  <tr> <th>Producto</th> <th>Categoria</th> <th>Detalle</th>    <th>Precio</th>         </tr></thead><tbody><tr>"
+      var body = ""
+      for (let index = 0; index < this.arrayCarrito.length; index++) {
+        const element = this.arrayCarrito[index];
+        body = body + "<tr> <td>"+ element.producto +"</td> " +" <td>"+ element.categoria +"</td> " +" <td>"+ element.detalle +"</td> " +" <td>"+ element.precio +"</td> " + " </tr>"
+      }
+      body = body + "<tr><td></td><td></td><td>Total</td><td>"+ totalTemp +"</td></tr>"
+
+      var endtable = "</tbody></table> <br> El total se desconto de su credito, puede ver la factura en la seccion de 'facturas' de la pagina web"
+
+      var factura = {
+        "nombre" : this.user.name + " " + this.user.lastname,
+        "mail": this.user.mail,
+        "mensaje" : "Factura Electronica",
+        "mensaje2" : table + body + endtable     
+      }
+
+      this.person.sendMessage(factura).subscribe()
 
        //SE CREA LA FACTURA
        var datafactura = {
@@ -109,41 +135,24 @@ export class CarritoComponent implements OnInit {
         this.person.sendMessage(mail).subscribe()
       }
 
+
+        //SE LIMPIA EL CARRITO
+        this.service.clean(this.user.id).subscribe(data => {
+          this.router.navigate(['dashboard/client/invoice/', idfactura])
+        })     
+
       })
 
        
 
 
-      //SE ENVIA MAIL AL COMPRADOR
-
-
-      var table = "<br> <table class=\"table\">  <thead class=\"thead-dark\">  <tr> <th>Producto</th> <th>Categoria</th> <th>Detalle</th>    <th>Precio</th>         </tr></thead><tbody><tr>"
-      var body = ""
-      for (let index = 0; index < this.arrayCarrito.length; index++) {
-        const element = this.arrayCarrito[index];
-        body = body + "<tr> <td>"+ element.producto +"</td> " +" <td>"+ element.categoria +"</td> " +" <td>"+ element.detalle +"</td> " +" <td>"+ element.precio +"</td> " + " </tr>"
-      }
-      body = body + "<tr><td></td><td></td><td>Total</td><td>"+ totalTemp +"</td></tr>"
-
-      var endtable = "</tbody></table> <br> El total se desconto de su credito, puede ver la factura en la seccion de 'facturas' de la pagina web"
-
-      var factura = {
-        "nombre" : this.user.name + " " + this.user.lastname,
-        "mail": this.user.mail,
-        "mensaje" : "Factura Electronica",
-        "mensaje2" : table + body + endtable     
-      }
-
-      this.person.sendMessage(factura).subscribe()
 
 
 
 
-      //SE LIMPIA EL CARRITO
-      this.service.clean(this.user.id).subscribe(data => {
-       
-      })     
-      this.inicializar()
+
+     
+      
       //no le alcanza el dinero
     } else {
       this.visible = true;

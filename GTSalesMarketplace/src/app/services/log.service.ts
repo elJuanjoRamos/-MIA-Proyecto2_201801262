@@ -15,8 +15,57 @@ export class LoggService {
     getLogg() {
         
         var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token')});
-        return this.http.post(`${this.URI}/getlogg/`, { headers }).pipe(map(data => {
+        return this.http.get(`${this.URI}/bitacora`, { headers }).pipe(map(data => {
             return data;
         }));
     }
+    reporte1() {
+        
+        var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token')});
+        return this.http.get(`${this.URI}/reporte1`, { headers }).pipe(map(data => {
+            return data;
+        }));
+    }
+    reporte2() {
+        
+        var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token')});
+        return this.http.get(`${this.URI}/reporte2`, { headers }).pipe(map(data => {
+            return data;
+        }));
+    }
+    reporte3() {
+        
+        var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token')});
+        return this.http.get(`${this.URI}/reporte3`, { headers }).pipe(map(data => {
+            return data;
+        }));
+    }
+    reporte4() {
+        
+        var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token')});
+        return this.http.get(`${this.URI}/reporte4`, { headers }).pipe(map(data => {
+            return data;
+        }));
+    }
+    reporte5() {
+        
+        var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token')});
+        return this.http.get(`${this.URI}/reporte5`, { headers }).pipe(map(data => {
+            return data;
+        }));
+    }
+    reporte6() {
+        
+        var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token')});
+        return this.http.get(`${this.URI}/reporte6`, { headers }).pipe(map(data => {
+            return data;
+        }));
+    }
+    getOrden(id: any) {
+        return this.http.get<any>(`${this.URI}/bitacora/${id}`).pipe(map(data => {
+                return data;
+            }));
+    }
+
+
 }

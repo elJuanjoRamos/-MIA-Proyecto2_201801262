@@ -87,7 +87,7 @@ productRoute.get('/gproduct/:id', async (req, res) => {
     let query = "select product.id, product.name, detail, price, product.photo, product.idperson, idcategory, category.name as category, p.name, p.lastname from PRODUCT " +
     "JOIN category  ON product.idcategory = category.id "+
     "JOIN PERSON p ON product.idperson = p.id "+ 
-    "where product.idcategory =:id";
+    "where product.idcategory =:id and statep = 1";
   
     let result = await database.Open(query, [id], true);
   
@@ -122,10 +122,10 @@ productRoute.get('/gproduct/:id', async (req, res) => {
   //GET BY PRICE
   productRoute.get('/gproductbyprice/:id', async (req, res) => {
     const { id } = req.params;
-    console.log(id)
     let query = "select product.id, product.name, detail, price, product.photo, product.idperson, idcategory, category.name as category, p.name, p.lastname from PRODUCT " +
     "JOIN category  ON product.idcategory = category.id "+
     "JOIN PERSON p ON product.idperson = p.id "+ 
+    " where statep = 1 " +
     "ORDER BY PRICE " + id;
     
     let result = await database.Open(query, [], true);

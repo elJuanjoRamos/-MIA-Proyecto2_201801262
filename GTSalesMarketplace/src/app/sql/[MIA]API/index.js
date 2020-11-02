@@ -45,7 +45,7 @@ const { strict } = require('assert');
 
 
 
-
+app.use('/', logg)
 app.use('/', file)
 app.use('/', user);
 app.use('/', category);
@@ -54,7 +54,6 @@ app.use('/', likes);
 app.use('/', comentario);
 app.use('/', denuncia);
 app.use('/', mail)
-app.use('/', logg)
 app.use('/', carrito)
 app.use('/', factura)
 

@@ -1,3 +1,45 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
     <h1 class="h2">Reporte de bitacora</h1>
 </div>
+
+<br>
+<div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputCity">Buscador</label>
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Buscar">
+      </div>
+     
+      <div class="form-group col-md-2">
+        <label for="inputZip">Filtro Fecha</label>
+        <select id="inputState" (change)="onChange($event.target.value)" class="form-control">
+          <option value="NOR" selected>Normal</option>
+          <option value="ASC">Ascendente</option>
+          <option value="DESC">Descendente</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <br>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Descripcion</th>
+                <th>Correo</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of arrayBitacora | filter:searchText">
+                <td scope="row">{{ c.id }}</td>
+                <td>{{ c.descripcion }}</td>
+                <td>{{ c.correo }}</td>
+                <td>{{ c.fecha }}</td>
+            </tr>
+        </tbody>
+      </table>
+    
+</div>

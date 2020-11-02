@@ -10,11 +10,11 @@ BEGIN
     IF rec_count <= 0 THEN
         INSERT INTO LIKES(idperson, idproduct) values(idper, idpro);
         INSERT INTO LOGG(descripcion, correo, fecha) values(concat(concat(concat('El cliente con ID ', idper) , ' le dio like al producto con ID '), idpro), cor, (SELECT CURRENT_DATE FROM DUAL));
-
+        commit;
     ELSE
         DELETE FROM LIKES WHERE idperson  = idper  AND idproduct = idpro;
         INSERT INTO LOGG(descripcion, correo, fecha) values(concat(concat(concat('El cliente con ID ', idper) , ' quito el like al producto con ID '), idpro), cor, (SELECT CURRENT_DATE FROM DUAL));
-
+        commit;
     END IF;
     
 
@@ -23,7 +23,7 @@ BEGIN
     IF rec_count_dislike > 0 THEN
         DELETE FROM DISLIKES WHERE idperson  = idper  AND idproduct = idpro;    
         INSERT INTO LOGG(descripcion, correo, fecha) values(concat(concat(concat('Se elimino el dislike del producto con ID ', idpro) , ' '), ' '), cor, (SELECT CURRENT_DATE FROM DUAL));
-
+        commit;
     END IF;
     
 
@@ -42,9 +42,11 @@ BEGIN
     IF rec_count <= 0 THEN
         INSERT INTO DISLIKES(idperson, idproduct) values(idper, idpro);
         INSERT INTO LOGG(descripcion, correo, fecha) values(concat(concat(concat('El cliente con ID ', idper) , ' le dio dislike al producto con ID '), idpro), cor, (SELECT CURRENT_DATE FROM DUAL));
+        commit;
     ELSE
         DELETE FROM DISLIKES WHERE idperson  = idper  AND idproduct = idpro;
         INSERT INTO LOGG(descripcion, correo, fecha) values(concat(concat(concat('El cliente con ID ', idper) , ' quito el dislike al producto con ID '), idpro), cor, (SELECT CURRENT_DATE FROM DUAL));
+        commit;
     END IF;
 
      select count(*) into rec_count_like  from LIKES WHERE idperson = idper AND idproduct = idpro;
@@ -52,6 +54,7 @@ BEGIN
     IF rec_count_like > 0 THEN
         DELETE FROM LIKES WHERE idperson  = idper  AND idproduct = idpro;    
         INSERT INTO LOGG(descripcion, correo, fecha) values(concat(concat(concat('Se elimino el like del producto con ID ', idpro) , ' '), ' '), cor, (SELECT CURRENT_DATE FROM DUAL));
+        commit;
     END IF;
     
     
@@ -74,12 +77,13 @@ CREATE OR REPLACE PROCEDURE insert_carrito (idpro in number, idper in number, co
 IS
     rec_count NUMBER := 0;
 BEGIN 
-    select count(*) into rec_count  from CARRITO WHERE idperson = idper AND idproduct = idpro;
+    select count(*) into rec_count  from CARRITO WHERE idperson = idper AND idproduct = idpro and estado = 1;
     
     
     IF rec_count <= 0 THEN
         INSERT INTO CARRITO(idperson, idproduct, estado) values(idper, idpro, 1);
         INSERT INTO LOGG(descripcion, correo, fecha) values(concat(concat(concat('El cliente con ID ', idper) , ' agrego a su carrito el producto con ID '), idpro), cor, (SELECT CURRENT_DATE FROM DUAL));        
+        commit;
     END IF;
 END insert_carrito;
 
@@ -90,5 +94,5 @@ IS
 BEGIN 
         INSERT INTO FACTURA(fecha, total, cliente, mailcliente, idcliente) values((SELECT CURRENT_DATE FROM DUAL), tot, cli, mailcli, idc);
         INSERT INTO LOGG(descripcion, correo, fecha) values(concat(concat(concat('El cliente con ID ', idc) , ' genero una factura con un total de '), tot), mailcli, (SELECT CURRENT_DATE FROM DUAL));        
-        
+        commit;
 END insert_factura;
