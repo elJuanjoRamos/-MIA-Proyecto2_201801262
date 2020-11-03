@@ -41,6 +41,8 @@ import { InvoiceComponent } from './components/dashboard/client/invoice/invoice.
 import { InvoiceDetailComponent } from './components/dashboard/client/invoice-detail/invoice-detail.component';
 import { LogComponent } from './components/dashboard/adminn/log/log.component';
 import { ReportesComponent } from './components/dashboard/adminn/reportes/reportes.component';
+import { ChatComponent } from './components/dashboard/client/chat/chat.component';
+import { ChatService } from './services/chat.service';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,7 @@ import { ReportesComponent } from './components/dashboard/adminn/reportes/report
     InvoiceDetailComponent,
     LogComponent,
     ReportesComponent,
+    ChatComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,7 +84,8 @@ import { ReportesComponent } from './components/dashboard/adminn/reportes/report
     ComentarioService,
     LoggService,
     CarritoService,
-    FacturaService
+    FacturaService,
+    ChatService
   ],
   bootstrap: [AppComponent]
 })

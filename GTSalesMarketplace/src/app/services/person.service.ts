@@ -11,7 +11,7 @@ export class PersonService {
     constructor(private http: HttpClient) { }
 
     getAll() {
-        return this.http.get<any[]>(`${this.URI}/person`).pipe(map(data => {
+        return this.http.get<any[]>(`${this.URI}/getall`).pipe(map(data => {
             return data;
             }));
     }

@@ -37,6 +37,7 @@ var mail = require('./routes/mail.route');
 var logg = require('./routes/log.route');
 var carrito = require('./routes/carrito.route');
 var factura = require('./routes/factura.route');
+var chat = require('./routes/chat.route');
 
 
 const { strict } = require('assert');
@@ -56,6 +57,7 @@ app.use('/', denuncia);
 app.use('/', mail)
 app.use('/', carrito)
 app.use('/', factura)
+app.use('/', chat)
 
 app.listen(port, function() {
     console.log('El servidor corre en el puerto:' + port)

@@ -10,6 +10,7 @@ import { DenunciaComponent } from './denuncia/denuncia.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { InvoiceDetailComponent } from './invoice-detail/invoice-detail.component';
+import { ChatComponent } from './chat/chat.component';
 
 export const client_routes: Routes = [
     { path: 'homeclient/:id', component: ChomeComponent },
@@ -21,6 +22,7 @@ export const client_routes: Routes = [
     { path: 'carrito', component: CarritoComponent },
     { path: 'invoice/:id', component:  InvoiceDetailComponent},
     { path: 'invoice', component:  InvoiceComponent},
+    { path: 'chat', component:  ChatComponent},
     
 //    { path: 'admin/asignacionauxiliar', component: AsignacionAuxiliar },
 //   { path: 'admin/asignacionauxiliar/:id', component: AsignacionForm },

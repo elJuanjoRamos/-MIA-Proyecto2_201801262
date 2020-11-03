@@ -179,3 +179,18 @@ CREATE TABLE DETALLEFACTURA(
     FOREIGN KEY (idCarrito)
     REFERENCES CARRITO(id)
 );
+
+
+CREATE TABLE CHAT(
+    id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+    PRIMARY KEY(id),
+    fecha DATE NOT NULL,
+    mensaje VARCHAR(150) not null,
+    receptor INT NOT NULL,
+    emisor INT NOT NULL,
+    enviadopor INT NOT NULL,
+    FOREIGN KEY (receptor)
+    REFERENCES PERSON(id),
+    FOREIGN KEY (emisor)
+    REFERENCES PERSON(id)
+);

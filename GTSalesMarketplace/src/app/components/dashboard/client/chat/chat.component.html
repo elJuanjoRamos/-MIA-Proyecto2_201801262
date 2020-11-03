@@ -1,0 +1,58 @@
+<div class="messaging">
+    <div class="inbox_msg">
+      <div class="inbox_people">
+        <div class="headind_srch">
+          <div class="recent_heading">
+            <h4>Recent</h4>
+          </div>
+          <div class="srch_bar">
+            <div class="stylish-input-group">
+              <input type="text" class="search-bar"  placeholder="Search" >
+              </div>
+          </div>
+        </div>
+        <div class="inbox_chat scroll">
+          
+          <div class="chat_list" *ngFor="let item of persons">
+            <div class="chat_people" (click)="getChat(item.id)">  
+              <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+              <div class="chat_ib">
+                <h5>{{item.name}}  {{item.lastname}}<span class="chat_date">{{ item.id}}</span></h5>
+                <p>Enviar un mensaje</p>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="mesgs">
+        <div class="msg_history" *ngIf="iduserChat != 0">
+          <div *ngFor="let item of mensajes">
+            
+            <div *ngIf="item.enviadopor == iduserChat" class="incoming_msg">
+              <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+              <div class="received_msg">
+                <div class="received_withd_msg">
+                  <p>{{item.mensaje}}</p>
+                  <span class="time_date"> {{ item.fecha }}</span></div>
+              </div>
+            </div>
+            
+            <div *ngIf="item.enviadopor == iduserLocal" class="outgoing_msg">
+              <div class="sent_msg">
+                <p>{{ item.mensaje }}</p>
+                <span class="time_date"> {{ item.fecha}} </span> </div>
+            </div>
+          </div>
+          
+        </div>
+        <div class="type_msg" *ngIf="iduserChat != 0">
+          <div class="input_msg_write">
+            <input type="text" [(ngModel)]="sendmessage" class="write_msg" placeholder="Type a message" />
+            <button class="msg_send_btn" (click)="send()" type="button"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
