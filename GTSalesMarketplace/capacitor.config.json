@@ -1,0 +1,13 @@
+{
+  "appId": "com.gtsalesmarketplace.www.app",
+  "appName": "GTSalesMarketplace",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist/GTSalesMarketplace",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">GTSalesMarketplace</string>
+    <string name="title_activity_main">GTSalesMarketplace</string>
+    <string name="package_name">com.gtsalesmarketplace.www.app</string>
+    <string name="custom_url_scheme">com.gtsalesmarketplace.www.app</string>
+</resources>
