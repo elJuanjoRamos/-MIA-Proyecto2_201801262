@@ -10,7 +10,9 @@ import { Router } from '@angular/router';
 @Injectable( /*{ providedIn: 'root' }*/)
 export class AuthenticationService {
 
-    URI = 'http://localhost:3000';
+    
+    URI = 'http://192.168.0.115';
+    //URI = 'http://localhost:3000';
     private currentUserSubject: BehaviorSubject<any>;
     public currentUser: Observable<any>;
 
