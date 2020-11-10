@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 
 @Injectable( /*{ providedIn: 'root' }*/)
 export class ProductService {
-    URI = 'http://192.168.0.115';
+    URI = 'http://192.168.0.115:3000';
     //URI = 'http://localhost:3000';
 
     constructor(private http: HttpClient) { }

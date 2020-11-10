@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 
 @Injectable( /*{ providedIn: 'root' }*/)
 export class PersonService {
-    URI = 'http://192.168.0.115';
+    URI = 'http://192.168.0.115:3000';
     //URI = 'http://localhost:3000';
 
     constructor(private http: HttpClient) { }
@@ -18,6 +18,11 @@ export class PersonService {
     }
     getPerson(id: any) {
         return this.http.get<any>(`${this.URI}/person/${id}`).pipe(map(data => {
+                return data;
+            }));
+    }
+    getPersonByMail(id: any) {
+        return this.http.get<any>(`${this.URI}/personmail/${id}`).pipe(map(data => {
                 return data;
             }));
     }

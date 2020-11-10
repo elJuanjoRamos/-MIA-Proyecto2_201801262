@@ -134,6 +134,44 @@ usrRout.get('/person/:id', async (req, res) => {
 });
 
 
+
+
+
+//GET USUARIO
+usrRout.get('/personmail/:id', async (req, res) => {
+  const { id } = req.params;
+
+  let query = "select * from PERSON where mail =:id";
+
+  let result = await database.Open(query, [id], true);
+
+
+  let usrSchema;
+  if (result.rows.length > 0 || result.rows.length != undefined) {
+    result.rows.map(usr => {
+      usrSchema = {
+        "id":       usr[0],
+        "name":     usr[1],
+        "lastname": usr[2],
+        "pais":     usr[3],
+        "cdate":    usr[4],
+        "pass":     usr[5],
+        "mail":     usr[6],
+        "photo":    usr[7],
+        "credit":   usr[8],
+        "activo":   usr[9],
+        "idtipe":   usr[10]
+      }
+    }); 
+    res.json(usrSchema);
+  } else {
+    res.json({
+      "messaje": "Error"
+    });
+  }
+});
+
+
 //GET USUARIO
 usrRout.get('/getall', async (req, res) => {
   const { id } = req.params;
